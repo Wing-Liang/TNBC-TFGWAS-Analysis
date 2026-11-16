@@ -13,7 +13,7 @@ EnsDb v86 / v75, and MACS2 2.2.9.1.
 | `requirements.txt` | Python packages |
 
 Some steps use packages that are not part of `signac_env` and were run in separate
-environments: co-accessibility (cicero), motifbreakR, TCGA download and DESeq2 (TCGAbiolinks,
+environments: motifbreakR, TCGA download and DESeq2 (TCGAbiolinks,
 DESeq2), VIPER (viper, aracne.networks; R 4.5.1), and scDRS (Python). Install these from
 Bioconductor, CRAN or PyPI as listed in `R_packages.txt` and `requirements.txt`.
 

@@ -1,10 +1,10 @@
 # ==============================================================================
-# 22_three_way_tf_overlap.py
+# 21_three_way_tf_overlap.py
 # Three-way overlap of TFs across levels and cohorts.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/22_three_way_tf_overlap.py   (from the repository root)
+# Run     : python3 scripts/05_replication/21_three_way_tf_overlap.py   (from the repository root)
 # ==============================================================================
-"""22_three_way_tf_overlap.py — TF-level overlap of the three shared evidence sets.
+"""21_three_way_tf_overlap.py — TF-level overlap of the three shared evidence sets.
 
 For one response, compares three sets at TF-name level:
   A  TFs of the motifs that are SUBTYPE-UNIQUE in both cohorts (motif model)
@@ -13,7 +13,7 @@ For one response, compares three sets at TF-name level:
 
 B and C are full group memberships, not only the significant members.
 
-  python3 22_three_way_tf_overlap.py [RESPONSE]     default TNBC
+  python3 21_three_way_tf_overlap.py [RESPONSE]     default TNBC
 """
 import csv, io, os, sys, collections
 

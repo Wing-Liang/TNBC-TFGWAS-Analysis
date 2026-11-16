@@ -1,8 +1,8 @@
 # ==============================================================================
-# 15_motif_master_table.py
+# 14_motif_master_table.py
 # Per-motif table: peak and variant counts, significance and subtype-uniqueness flags, both cohorts.
 # Produces: Tables S7-S8
-# Run     : python3 scripts/05_replication/15_motif_master_table.py   (from the repository root)
+# Run     : python3 scripts/05_replication/14_motif_master_table.py   (from the repository root)
 # ==============================================================================
 """Per-motif master table: peak/variant counts in both cohorts, plus Bonferroni
 significance and subtype-uniqueness flags for every response in both cohorts."""

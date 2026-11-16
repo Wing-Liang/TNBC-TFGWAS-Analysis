@@ -1,13 +1,13 @@
 # ==============================================================================
-# 04_geneset_score_umaps.R
+# 03_geneset_score_umaps.R
 # UMAPs of dissociation-stress and AP-1 scores, both cohorts.
 # Produces: Fig S9
 # Inputs  : results/motif_sets/umap_embedding_celltype.csv
 #           replication/data/cellxgene/embeddings_replication.csv
-# Run     : Rscript scripts/06_dissociation_ap1/04_geneset_score_umaps.R   (from the repository root)
+# Run     : Rscript scripts/06_dissociation_ap1/03_geneset_score_umaps.R   (from the repository root)
 # ==============================================================================
-## 04_geneset_score_umaps.R — UMAPs of the AddModuleScore gene-set scores:
-##   dissociation signature (genes_dissoc1; 32 genes, van den Brink et al. 2017) and its AP-1 subset
+## 03_geneset_score_umaps.R — UMAPs of the AddModuleScore gene-set scores:
+##   dissociation signature (genes_dissoc1; 32 genes, O'Flanagan et al. 2019) and its AP-1 subset
 ##   (AP1_score1; FOS, FOSB, JUN, JUNB, JUND, ATF3), for the main analysis set and the replication set.
 ## Embeddings (RNA UMAP, as in Fig. 2 / Fig. 3D):
 ##   main        results/motif_sets/umap_embedding_celltype.csv (umap.rna of the 16,451 final cells)

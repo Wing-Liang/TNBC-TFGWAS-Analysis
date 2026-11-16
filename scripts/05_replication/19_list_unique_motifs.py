@@ -1,15 +1,15 @@
 # ==============================================================================
-# 20_list_unique_motifs.py
+# 19_list_unique_motifs.py
 # List subtype-unique motifs in both cohorts.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/20_list_unique_motifs.py   (from the repository root)
+# Run     : python3 scripts/05_replication/19_list_unique_motifs.py   (from the repository root)
 # ==============================================================================
-"""20_list_unique_motifs.py — name the UNIQUE significant motifs shared by both cohorts.
+"""19_list_unique_motifs.py — name the UNIQUE significant motifs shared by both cohorts.
 
 Motif model (727 tests). Uniqueness is computed inside each cohort, then intersected:
 a motif is listed only if it is unique in discovery AND unique in replication.
 
-  python3 20_list_unique_motifs.py [RESPONSE] [MODE]
+  python3 19_list_unique_motifs.py [RESPONSE] [MODE]
       RESPONSE  TNBC | LuminalA | LuminalB | LuminalB_HER2Neg | HER2   (default TNBC)
       MODE      sub     = unique vs the other four subtypes  (default)
                 overall = unique vs overall BC

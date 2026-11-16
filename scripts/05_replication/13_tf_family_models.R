@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 14_tf_family_models.R
+# 13_tf_family_models.R
 # TF-GWAS at motif, TF-family and JASPAR-cluster level.
 # Produces: Table S8
-# Run     : Rscript scripts/05_replication/14_tf_family_models.R   (from the repository root)
+# Run     : Rscript scripts/05_replication/13_tf_family_models.R   (from the repository root)
 # ==============================================================================
 # =============================================================================
-# 14_tf_family_models.R -- TF-GWAS at motif, TF-family and JASPAR-cluster level (Table S8)
+# 13_tf_family_models.R -- TF-GWAS at motif, TF-family and JASPAR-cluster level (Table S8)
 #
 # One pass over a cohort's matrix; for every response (5 subtypes + overall BC) and
 # every level (motif 727 / JASPAR122 / TF family 94) computes the observed

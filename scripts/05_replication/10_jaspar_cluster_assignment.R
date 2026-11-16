@@ -14,10 +14,9 @@
 #    35 do not — JASPAR clustered a different version of the same accession.
 #       Each is assigned to the cluster of its MOST SIMILAR clustered matrix,
 #       using the same offset-aligned Pearson correlation (reverse complement
-#       allowed, min overlap 6) used everywhere else in this workstream.
-#       Version-based fallback was tested and REJECTED: it fails for 12 of the 35
-#       (RUNX1 .1 vs .2 is only r = 0.649; ELF5 0.704; AR 0.729) — see
-#       11_jaspar_cluster_validation.R.
+#       allowed, min overlap 6). Assigning by the clustered version of the same
+#       accession was not used: for 12 of the 35 the versions differ substantially
+#       (e.g. RUNX1 .1 vs .2, r = 0.649; ELF5 0.704; AR 0.729).
 #
 # SOURCES — fetched from JASPAR, not from any derived local copy:
 #   PFMs     https://jaspar.elixir.no/download/data/2022/CORE/

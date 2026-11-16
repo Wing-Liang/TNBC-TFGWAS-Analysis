@@ -34,17 +34,16 @@ Run the scripts in the order listed, from the repository root (see the main READ
 | `09d_tfgwas_overall_bc_discovery.sbatch` | SLURM array wrapper for 09c_tfgwas_overall_bc.R, discovery cohort. | Table S4 (overall BC) |
 | `09e_combine_overall_bc.R` | Combine the overall-BC batch results per cohort and add BH-FDR. | Tables S4, S7 (overall BC) |
 | `10_jaspar_cluster_assignment.R` | Assign the 727 motifs to JASPAR 2022 matrix clusters. | reference/group_JASPAR122.csv |
-| `11_jaspar_cluster_validation.R` | Validate cluster assignments made by nearest-matrix similarity. | reference/fallback_validation.csv |
-| `12_tf_family_annotation.R` | Annotate motifs with TFClass transcription-factor families. | reference/group_TFfamily.csv |
-| `13_peaks_per_motif.R` | Count peaks carrying each motif in both cohorts. | Table S8 (input) |
-| `14_tf_family_models.R` | TF-GWAS at motif, TF-family and JASPAR-cluster level. | Table S8 |
-| `14_tf_family_models.sbatch` | SLURM wrapper for 14_tf_family_models.R. | Table S8 |
-| `15_motif_master_table.py` | Per-motif table: peak and variant counts, significance and subtype-uniqueness flags, both cohorts. | Tables S7-S8 |
-| `16_cohort_matrix_check.R` | Structural check of the replication matrix against discovery. | data check |
-| `17_summary_tables.py` | Summary counts of significant and subtype-unique units per level. | Table S8 |
-| `18_cross_cohort_overlap.py` | Overlap of significant units between cohorts. | Table S8 |
-| `19_list_shared_groups.py` | List TF families significant in both cohorts. | Table S8 |
-| `20_list_unique_motifs.py` | List subtype-unique motifs in both cohorts. | Table S8 |
-| `21_triple_convergence.py` | Motifs significant at motif, family and cluster level. | Table S8 |
-| `22_three_way_tf_overlap.py` | Three-way overlap of TFs across levels and cohorts. | Table S8 |
-| `23_marker_detection_by_cohort.R` | Canonical marker detection by cell type in both cohorts. | Table S6 |
+| `11_tf_family_annotation.R` | Annotate motifs with TFClass transcription-factor families. | reference/group_TFfamily.csv |
+| `12_peaks_per_motif.R` | Count peaks carrying each motif in both cohorts. | Table S8 (input) |
+| `13_tf_family_models.R` | TF-GWAS at motif, TF-family and JASPAR-cluster level. | Table S8 |
+| `13_tf_family_models.sbatch` | SLURM wrapper for 13_tf_family_models.R. | Table S8 |
+| `14_motif_master_table.py` | Per-motif table: peak and variant counts, significance and subtype-uniqueness flags, both cohorts. | Tables S7-S8 |
+| `15_cohort_matrix_check.R` | Structural check of the replication matrix against discovery. | data check |
+| `16_summary_tables.py` | Summary counts of significant and subtype-unique units per level. | Table S8 |
+| `17_cross_cohort_overlap.py` | Overlap of significant units between cohorts. | Table S8 |
+| `18_list_shared_groups.py` | List TF families significant in both cohorts. | Table S8 |
+| `19_list_unique_motifs.py` | List subtype-unique motifs in both cohorts. | Table S8 |
+| `20_triple_convergence.py` | Motifs significant at motif, family and cluster level. | Table S8 |
+| `21_three_way_tf_overlap.py` | Three-way overlap of TFs across levels and cohorts. | Table S8 |
+| `22_marker_detection_by_cohort.R` | Canonical marker detection by cell type in both cohorts. | Table S6 |

@@ -1,10 +1,10 @@
 # ==============================================================================
-# 18_cross_cohort_overlap.py
+# 17_cross_cohort_overlap.py
 # Overlap of significant units between cohorts.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/18_cross_cohort_overlap.py   (from the repository root)
+# Run     : python3 scripts/05_replication/17_cross_cohort_overlap.py   (from the repository root)
 # ==============================================================================
-"""18_cross_cohort_overlap.py — discovery vs replication overlap, all three levels.
+"""17_cross_cohort_overlap.py — discovery vs replication overlap, all three levels.
 
 Motif model (727), per response:
   discovery / replication / overlap of Bonferroni-significant motifs, and the

@@ -1,4 +1,4 @@
-## 12_motif_annotation_chromvar.R
+## 10_motif_annotation_chromvar.R
 ## JASPAR 2022 motif annotation of the discovery peaks, chromVAR motif activities, differential
 ## motif activity between cell types, and motif enrichment in cell-type-unique DA peaks.
 ##
@@ -13,8 +13,8 @@
 ##
 ## Inputs   results/singlecell/atac_ATAC_RNAlabeled.rds          (05_atac_umap_figures.R)
 ##          results/singlecell/final_cell_barcodes.csv
-##          results/singlecell/peak_annotation.csv               (08_markers_and_da_peaks.R)
-##          results/singlecell/combined_peaks_gene_all.csv       (08_markers_and_da_peaks.R)
+##          results/singlecell/peak_annotation.csv               (07_markers_and_da_peaks.R)
+##          results/singlecell/combined_peaks_gene_all.csv       (07_markers_and_da_peaks.R)
 ##          reference/st4_motif_ids.txt
 ## Outputs  results/singlecell/jaspar2022_motif_list.csv          all human JASPAR 2022 motifs
 ##          results/singlecell/jaspar2022_motifs_727.csv          the 727 tested motifs
@@ -24,7 +24,7 @@
 ##          results/singlecell/Motif_DiffAct_others.csv
 ##          results/singlecell/motif_matrix_allPeaks.csv
 ##          results/singlecell/enriched_motifs_list_uniqDAP_ALL.csv
-## Run from the repository root:  Rscript scripts/01_singlecell_annotation/12_motif_annotation_chromvar.R
+## Run from the repository root:  Rscript scripts/01_singlecell_annotation/10_motif_annotation_chromvar.R
 
 TNBC_ROOT <- Sys.getenv("TNBC_ROOT", ".")
 

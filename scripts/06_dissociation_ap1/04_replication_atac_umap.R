@@ -1,13 +1,13 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 06_replication_atac_umap.R
+# 04_replication_atac_umap.R
 # ATAC UMAP of the replication cohort.
 # Produces: Fig S9
 # Inputs  : replication/qc/replication_postQC.rds
 #           replication/data/cellxgene/embeddings_replication.csv
-# Run     : Rscript scripts/06_dissociation_ap1/06_replication_atac_umap.R   (from the repository root)
+# Run     : Rscript scripts/06_dissociation_ap1/04_replication_atac_umap.R   (from the repository root)
 # ==============================================================================
-# 06_replication_atac_umap.R -- a self-contained ATAC UMAP for the replication cohort
+# 04_replication_atac_umap.R -- a self-contained ATAC UMAP for the replication cohort
 #
 # WHY THIS IS NEEDED
 # The replication panel of AP1_TRE_UMAP was drawn on data/cellxgene/embeddings_replication.csv, which

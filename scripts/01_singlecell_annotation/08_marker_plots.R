@@ -1,13 +1,13 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 10_marker_plots.R
+# 08_marker_plots.R
 # Canonical marker feature plots for the scRNA-seq cell types.
 # Produces: Fig 2B
 # Inputs  : results/singlecell/final_cell_barcodes.csv
 #           results/singlecell/atac_ATAC_RNAlabeled.rds
-# Run     : Rscript scripts/01_singlecell_annotation/10_marker_plots.R   (from the repository root)
+# Run     : Rscript scripts/01_singlecell_annotation/08_marker_plots.R   (from the repository root)
 # ==============================================================================
-# 10_marker_plots.R
+# 08_marker_plots.R
 #
 # scRNA UMAP plots for the canonical cell-type marker panel, discovery cohort
 # (GSE162798). Uses the RNA UMAP (umap.rna) and the QC'd final cell barcodes.

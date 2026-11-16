@@ -1,11 +1,11 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 12_tf_family_annotation.R
+# 11_tf_family_annotation.R
 # Annotate motifs with TFClass transcription-factor families.
 # Produces: reference/group_TFfamily.csv
-# Run     : Rscript scripts/05_replication/12_tf_family_annotation.R   (from the repository root)
+# Run     : Rscript scripts/05_replication/11_tf_family_annotation.R   (from the repository root)
 # ==============================================================================
-# 12_tf_family_annotation.R — TFClass family / class for the 727 tested motifs
+# 11_tf_family_annotation.R — TFClass family / class for the 727 tested motifs
 #
 # R port of 46_tf_family_fetch.ps1, so the TF-family grouping can be regenerated
 # on the HPC cluster rather than only on the Windows workstation.
@@ -25,7 +25,7 @@
 #         reference/group_TFfamily.csv     motif_id, group  (group = family)
 #
 # Verify against the existing mapping rather than overwriting blind:
-#   Rscript scripts/05_replication/12_tf_family_annotation.R --check
+#   Rscript scripts/05_replication/11_tf_family_annotation.R --check
 # writes to *_new.csv and diffs against the current files.
 
 suppressPackageStartupMessages({ library(jsonlite); library(data.table) })

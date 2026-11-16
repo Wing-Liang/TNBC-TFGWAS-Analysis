@@ -1,9 +1,9 @@
 #!/bin/bash
 # ==============================================================================
-# 14_tf_family_models.sbatch
-# SLURM wrapper for 14_tf_family_models.R.
+# 13_tf_family_models.sbatch
+# SLURM wrapper for 13_tf_family_models.R.
 # Produces: Table S8
-# Run     : sbatch scripts/05_replication/14_tf_family_models.sbatch   (from the repository root)
+# Run     : sbatch scripts/05_replication/13_tf_family_models.sbatch   (from the repository root)
 # ==============================================================================
 #SBATCH --job-name=grp_tfgwas
 ##SBATCH --partition=<your_partition>   # site-specific
@@ -22,10 +22,10 @@
 cd "${TNBC_ROOT:?set TNBC_ROOT}"
 mkdir -p replication/logs
 mkdir -p logs replication/tfgwas_grouped
-LOG=replication/logs/14_tf_family_models_${OBS_COHORT:-discovery}.log
+LOG=replication/logs/13_tf_family_models_${OBS_COHORT:-discovery}.log
 {
-  echo "=== 14_tf_family_models.R  $(date)  host=$(hostname)  job=$SLURM_JOB_ID ==="
+  echo "=== 13_tf_family_models.R  $(date)  host=$(hostname)  job=$SLURM_JOB_ID ==="
   echo "cohort=${OBS_COHORT} csv=${OBS_CSV} poscol=${OBS_POSCOL}"
-  Rscript scripts/05_replication/14_tf_family_models.R
+  Rscript scripts/05_replication/13_tf_family_models.R
   echo "=== exit=$? $(date) ==="
 } 2>&1 | tee -a "$LOG"

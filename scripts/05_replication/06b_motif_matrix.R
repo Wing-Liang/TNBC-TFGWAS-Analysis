@@ -432,7 +432,7 @@ full_dataset<-fread("tfgwas/replication_variant_peak_motif_GWAS_ALL.csv.gz")
 ##
 ## NOT PORTED: that script's DA-motif integration, i.e.
 ## FindAllMarkers on the chromvar assay to get differential motif ACTIVITY per cell type
-## (discovery's Motif_DiffAct_general_cluster.csv, 01_singlecell_annotation/12_motif_annotation_chromvar.R) and the
+## (discovery's Motif_DiffAct_general_cluster.csv, 01_singlecell_annotation/10_motif_annotation_chromvar.R) and the
 ## intersection of those DA motifs with GWAS-variant motif counts.
 ## If it is wanted later: run FindAllMarkers(assay="chromvar", only.pos=TRUE,
 ## mean.fxn=rowMeans, test.use="LR", fc.name="avg_diff", latent.vars="nCount_ATAC") on

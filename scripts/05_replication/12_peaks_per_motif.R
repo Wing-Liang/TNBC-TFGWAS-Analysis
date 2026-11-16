@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 13_peaks_per_motif.R
+# 12_peaks_per_motif.R
 # Count peaks carrying each motif in both cohorts.
 # Produces: Table S8 (input)
 # Inputs  : reference/st4_motif_ids.txt
 #           reference/group_JASPAR122.csv
 #           reference/group_TFfamily.csv
-# Run     : Rscript scripts/05_replication/13_peaks_per_motif.R   (from the repository root)
+# Run     : Rscript scripts/05_replication/12_peaks_per_motif.R   (from the repository root)
 # ==============================================================================
 # Per-motif peak counts for both cohorts, joined to the per-motif variant counts
 # from the two GWAS matrices.

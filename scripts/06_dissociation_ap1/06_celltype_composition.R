@@ -1,13 +1,13 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 08_celltype_composition.R
+# 06_celltype_composition.R
 # Cell-type composition of the two cohorts.
 # Produces: Fig S9
 # Inputs  : results/singlecell/atac_motif.rds
 #           replication/celltypes/cellxgene_celltypes_replication.csv
-# Run     : Rscript scripts/06_dissociation_ap1/08_celltype_composition.R   (from the repository root)
+# Run     : Rscript scripts/06_dissociation_ap1/06_celltype_composition.R   (from the repository root)
 # ==============================================================================
-# 08_celltype_composition.R -- cell-type composition of the two cohorts, side by side.
+# 06_celltype_composition.R -- cell-type composition of the two cohorts, side by side.
 # AP-1/TRE is the dominant motif of mesenchymal and basal chromatin, so a shift in the
 # stromal fraction is the leading remaining explanation for the TRE deficit.
 ## ---- paths (set the environment variables; see README) ----

@@ -1,5 +1,5 @@
 # ==============================================================================
-# 08_markers_and_da_peaks.R
+# 07_markers_and_da_peaks.R
 # Differentially accessible peaks, peak annotation and top-5 marker genes per cell type.
 # Produces: Fig 2F, Table S1; DA peaks used for Fig 3F
 # Inputs  : results/singlecell/atac_ATAC_RNAlabeled.rds
@@ -12,13 +12,12 @@
 #           ...
 # Outputs : results/singlecell/da_results_all_FindAllMarkers.csv
 #           results/singlecell/gene_list_proteincoding_lincRNA.csv
-#           results/singlecell/dap_top5/DAP_CovPlot_Bs_LLNLF-65H9.1.jpg
 #           results/singlecell/Upset_plot_DApeaks.jpg
 #           results/singlecell/Stackedplot_plot_DApeaks.jpg
 #           results/singlecell/Table_DApeak.jpg
 #           results/singlecell/ATAC_volcano_plot_LS1_vs_LS2.jpg
 #           ...
-# Run     : Rscript scripts/01_singlecell_annotation/08_markers_and_da_peaks.R   (from the repository root)
+# Run     : Rscript scripts/01_singlecell_annotation/07_markers_and_da_peaks.R   (from the repository root)
 # ==============================================================================
 ## ---- paths (set the environment variables; see README) ----
 TNBC_ROOT <- Sys.getenv("TNBC_ROOT", ".")
@@ -209,176 +208,6 @@ combined_peaks_gene_top5 <- top5_dap_all %>%
 write.csv(combined_peaks_gene_top5,
           file = "results/singlecell/combined_peaks_gene_top5.csv",
           row.names = FALSE)
-
-##########################################################################################
-# --------------------------------- Genomic region plot ---------------------------------
-##########################################################################################
-Final_cell_barcode<-fread('results/singlecell/final_cell_barcodes.csv',header=TRUE)
-
-combined_peaks_gene_top5<-fread("results/singlecell/combined_peaks_gene_top5.csv", header = TRUE)
-atac_subset_qc <- readRDS("results/singlecell/atac_links_general_all.rds")
-links<-Links(atac_subset_qc)
-atac_subset_qc <- subset(atac_subset_qc , cells = Final_cell_barcode$x)
-links<-links[mcols(links)$score >= 0.1]
-Links(atac_subset_qc)<-links
-DefaultAssay(atac_subset_qc)<-'ATAC'
-
-# Plotting genomic regions
-atac_subset_qc <- SortIdents(atac_subset_qc)
-
-# Load required libraries
-library(Seurat)
-library(Signac)
-library(GenomicRanges)
-
-# Define constants ------------------------------------------------------------
-OUTPUT_DIR <- "results/singlecell/dap_top5/"
-
-# Extract genes of interest per cluster
-GENES_OF_INTEREST_BY_CLUSTER <- split(combined_peaks_gene_top5$gene, combined_peaks_gene_top5$cluster_name)
-
-COMPARISONS <- list(
-  list(cluster = "LHr", suffix = "LHr"),
-  list(cluster = "LS-1", suffix = "LS1"),
-  list(cluster = "LS-2", suffix = "LS2"),
-  list(cluster = "Bs", suffix = "Bs"),
-  list(cluster = "Fb", suffix = "Fb"),
-  list(cluster = "Pc", suffix = "Pc"),
-  list(cluster = "Endo", suffix = "Endo"),
-  list(cluster = "Myl", suffix = "Myl"),
-  list(cluster = "T", suffix = "T"),
-  list(cluster = "B", suffix = "B")
-)
-
-# Define plotting parameters ---------------------------------------------------
-PLOT_WIDTH <- 8  # inches
-PLOT_HEIGHT <- 8 # inches
-PLOT_RES <- 200   # dpi
-EXTEND_UPSTREAM <- 65000
-EXTEND_DOWNSTREAM <- 65000
-
-# Core plotting function -------------------------------------------------------
-generate_comparison_plots <- function(comparison, combined_data, atac_obj) {
-  # Extract genes specific to the cluster
-
-  genes_of_interest <- GENES_OF_INTEREST_BY_CLUSTER[[comparison$cluster]]
-
-  # Validate input data
-  if(is.null(genes_of_interest) || length(genes_of_interest) == 0) {
-    warning(paste("No genes found for comparison:", comparison$suffix))
-    return(NULL)
-  }
-
-  # Create output directory
-  if(!dir.exists(OUTPUT_DIR)) {
-    dir.create(OUTPUT_DIR, recursive = TRUE, showWarnings = FALSE)
-  }
-
-  # Generate plots for each gene in the cluster
-  plots <- lapply(genes_of_interest, function(gene) {
-    tryCatch({
-      # Find overlapping regions
-      gene_coords <- LookupGeneCoords(atac_obj, gene)
-      gene_coords <- resize(gene_coords, width = width(gene_coords) + 2 * 65000, fix = "center")
-      peak_ranges <- StringToGRanges(combined_data$peaks)
-      highlight_regions <- subsetByOverlaps(peak_ranges, gene_coords)
-      highlight_regions$color <- "orange"
-
-      # Generate coverage plot
-      CoveragePlot(
-        object = atac_obj,
-        region = gene,
-        extend.upstream = EXTEND_UPSTREAM,
-        extend.downstream = EXTEND_DOWNSTREAM,
-        annotation = TRUE,
-        peaks = TRUE,
-        features = gene,
-        scale.factor = 1e6,
-        region.highlight = highlight_regions,
-        expression.assay = "RNA",
-        links = TRUE
-      )
-    }, error = function(e) {
-      message(paste("Error processing", gene, ":", e$message))
-      NULL
-    })
-  })
-
-  # Save valid plots
-  save_plots(plots, comparison$suffix, genes_of_interest)
-}
-
-# Helper function for saving plots ---------------------------------------------
-save_plots <- function(plots, comparison_suffix, genes) {
-  invisible(lapply(seq_along(plots), function(i) {
-    if(!is.null(plots[[i]])) {
-      output_file <- file.path(
-        OUTPUT_DIR,
-        paste0("DAP_CovPlot_links_", comparison_suffix, "_", genes[i], ".jpg")
-      )
-
-      jpeg(
-        filename = output_file,
-        width = PLOT_WIDTH,
-        height = PLOT_HEIGHT,
-        units = "in",
-        res = PLOT_RES
-      )
-      print(plots[[i]])
-      dev.off()
-    }
-  }))
-}
-
-# Execute analysis pipeline ----------------------------------------------------
-# Initialize output directory
-if(!dir.exists(OUTPUT_DIR)) {
-  dir.create(OUTPUT_DIR, recursive = TRUE, showWarnings = FALSE)
-}
-
-# Process all comparisons
-invisible(lapply(COMPARISONS, function(comp) {
-  generate_comparison_plots(
-    comparison = comp,
-    combined_data = combined_peaks_gene_top5,
-    atac_obj = atac_subset_qc
-  )
-}))
-
-cat("All coverage plots successfully generated for each cluster-specific gene set.\n")
-
-################################################################
- #                          Outstanding genes                  #
-################################################################
-combined_peaks_gene_top5<-fread("results/singlecell/combined_peaks_gene_top5.csv",header = TRUE)
-
-# find DA peaks overlapping gene of interest
-# Bs
-gene_coords <- LookupGeneCoords(atac_subset_qc, 'LLNLF-65H9.1')
-peak_ranges <- StringToGRanges(combined_peaks_gene_top5[combined_peaks_gene_top5$cluster=='Bs' &
-                                                          combined_peaks_gene_top5$gene_name=='LLNLF-65H9.1',]$gene)
-gene_coords <- resize(gene_coords, width = width(gene_coords) + 2 * 1.5e5, fix = "center")
-highlight_regions <- subsetByOverlaps(peak_ranges, gene_coords)
-highlight_regions$color <- "orange"
-
-jpeg("results/singlecell/dap_top5/DAP_CovPlot_Bs_LLNLF-65H9.1.jpg")
-CoveragePlot(
-  object = atac_subset_qc,
-  region = 'LLNLF-65H9.1',
-  region.highlight = highlight_regions,
-  annotation = TRUE,
-  peaks = TRUE,
-  links = TRUE)
-dev.off()
-
-ExpressionPlot(
-  object = atac_subset_qc,
-  features = 'LLNLF-65H9.1',
-  assay = "RNA"
-)
-
-# Check if the gene exists in the RNA assay
-"LLNLF-65H9.1" %in% rownames(GetAssayData(atac_subset_qc, assay = "RNA"))
 
 #############################################
 #             Upset plot for DAPs          #

@@ -1,14 +1,14 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 07_ap1_motif_activity_umap.R
+# 05_ap1_motif_activity_umap.R
 # AP-1 motif activity on the UMAP, both cohorts.
 # Produces: Fig S9
 # Inputs  : replication/data/cellxgene/embeddings_replication.csv
 #           replication/celltypes/cellxgene_celltypes_replication.csv
 #           replication/tfgwas_grouped/replication_atac_umap.csv
-# Run     : Rscript scripts/06_dissociation_ap1/07_ap1_motif_activity_umap.R   (from the repository root)
+# Run     : Rscript scripts/06_dissociation_ap1/05_ap1_motif_activity_umap.R   (from the repository root)
 # ==============================================================================
-# 07_ap1_motif_activity_umap.R -- AP-1 (TRE / CRE motif) accessibility by cell, both cohorts.
+# 05_ap1_motif_activity_umap.R -- AP-1 (TRE / CRE motif) accessibility by cell, both cohorts.
 #
 # Shows which cells carry AP-1 TRE accessibility in each cohort, how the cohorts differ in those
 # cells, and how much of the difference cell-type composition alone accounts for.
@@ -135,7 +135,7 @@ if (nrow(X) < n0) ts("dropped ", n0 - nrow(X), " cells without a cell-type label
 X[, cohort := factor(cohort, levels = CO)]
 
 ## ---- replication panels: ATAC embedding of the replication cells alone ----------------------
-## (06_replication_atac_umap.R), so each cohort is drawn on an embedding of its own cells, as for
+## (04_replication_atac_umap.R), so each cohort is drawn on an embedding of its own cells, as for
 ## discovery. The source atlas embedding (data/cellxgene/embeddings_replication.csv) was computed
 ## over all 51,367 atlas cells, of which these 10,700 are ~21%. kNN cell-type purity is similar on
 ## either embedding (0.843 atlas vs 0.854 own; discovery 0.954).

@@ -1,11 +1,11 @@
-## 13_export_umap_embedding.R
+## 11_export_umap_embedding.R
 ## Export the RNA UMAP coordinates and cell type of every post-QC discovery cell, so that the
 ## module-score and gene-set UMAPs can be drawn without reloading the Seurat object.
 ##
-## Inputs   results/singlecell/atac_motif.rds                 (12_motif_annotation_chromvar.R)
+## Inputs   results/singlecell/atac_motif.rds                 (10_motif_annotation_chromvar.R)
 ##          results/singlecell/final_cell_barcodes.csv
 ## Outputs  results/motif_sets/umap_embedding_celltype.csv    cell, UMAP_1, UMAP_2, celltype
-## Run from the repository root:  Rscript scripts/01_singlecell_annotation/13_export_umap_embedding.R
+## Run from the repository root:  Rscript scripts/01_singlecell_annotation/11_export_umap_embedding.R
 
 TNBC_ROOT <- Sys.getenv("TNBC_ROOT", ".")
 

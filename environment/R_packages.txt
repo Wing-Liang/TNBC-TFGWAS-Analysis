@@ -10,7 +10,6 @@ BSgenome.Hsapiens.UCSC.hg19
 BSgenome.Hsapiens.UCSC.hg38
 ChIPseeker
 chromVAR
-cicero
 circlize
 clustree
 coloc
@@ -50,7 +49,6 @@ lme4
 lmerTest
 locuszoomr
 Matrix
-monocle3
 motifbreakR
 MotifDb
 motifmatchr
@@ -71,7 +69,6 @@ scDblFinder
 Seurat
 SeuratDisk
 SeuratObject
-SeuratWrappers
 Signac
 SingleCellExperiment
 SNPlocs.Hsapiens.dbSNP155.GRCh37

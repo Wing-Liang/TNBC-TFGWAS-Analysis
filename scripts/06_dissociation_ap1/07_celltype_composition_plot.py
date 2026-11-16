@@ -1,8 +1,8 @@
 # ==============================================================================
-# 09_celltype_composition_plot.py
+# 07_celltype_composition_plot.py
 # Plot of cell-type composition, both cohorts.
 # Produces: Fig S9
-# Run     : python3 scripts/06_dissociation_ap1/09_celltype_composition_plot.py   (from the repository root)
+# Run     : python3 scripts/06_dissociation_ap1/07_celltype_composition_plot.py   (from the repository root)
 # ==============================================================================
 """Cell-type composition lollipop plot, discovery (GSE162798) vs replication (GSE244585).
 One SHARED y axis of harmonised cell types, so cell types present in both cohorts vs only one

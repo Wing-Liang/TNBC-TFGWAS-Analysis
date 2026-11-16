@@ -1,16 +1,16 @@
 # ==============================================================================
-# 19_list_shared_groups.py
+# 18_list_shared_groups.py
 # List TF families significant in both cohorts.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/19_list_shared_groups.py   (from the repository root)
+# Run     : python3 scripts/05_replication/18_list_shared_groups.py   (from the repository root)
 # ==============================================================================
-"""19_list_shared_groups.py — name the groups significant in BOTH cohorts.
+"""18_list_shared_groups.py — name the groups significant in BOTH cohorts.
 
 Lists, for one response and one group level, the groups that are Bonferroni-
 significant in discovery AND in replication under the group model tested
 directly, with their member motifs, TF names and TFClass families.
 
-  python3 19_list_shared_groups.py [RESPONSE] [LEVEL]
+  python3 18_list_shared_groups.py [RESPONSE] [LEVEL]
       RESPONSE  TNBC | LuminalA | LuminalB | LuminalB_HER2Neg | HER2 | OverallBC
       LEVEL     JASPAR122 | TFfamily        (default JASPAR122)
 

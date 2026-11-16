@@ -1,10 +1,10 @@
 # ==============================================================================
-# 17_summary_tables.py
+# 16_summary_tables.py
 # Summary counts of significant and subtype-unique units per level.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/17_summary_tables.py   (from the repository root)
+# Run     : python3 scripts/05_replication/16_summary_tables.py   (from the repository root)
 # ==============================================================================
-"""17_summary_tables.py — the per-response summary tables for one cohort.
+"""16_summary_tables.py — the per-response summary tables for one cohort.
 
 Reproduces, for the motif (727) model:
   (1) Bonferroni-significant motifs

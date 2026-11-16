@@ -1,17 +1,17 @@
 # ==============================================================================
-# 21_triple_convergence.py
+# 20_triple_convergence.py
 # Motifs significant at motif, family and cluster level.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/21_triple_convergence.py   (from the repository root)
+# Run     : python3 scripts/05_replication/20_triple_convergence.py   (from the repository root)
 # ==============================================================================
-"""21_triple_convergence.py — motifs supported at ALL THREE levels in BOTH cohorts.
+"""20_triple_convergence.py — motifs supported at ALL THREE levels in BOTH cohorts.
 
 A motif qualifies only if:
   (1) it is Bonferroni-significant at motif level in discovery AND replication;
   (2) its JASPAR122 cluster is significant in the cluster model in BOTH cohorts;
   (3) its TF family is significant in the family model in BOTH cohorts.
 
-  python3 21_triple_convergence.py [RESPONSE]      default TNBC
+  python3 20_triple_convergence.py [RESPONSE]      default TNBC
 """
 import csv, io, os, sys
 

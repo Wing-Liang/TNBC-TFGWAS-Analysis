@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 16_cohort_matrix_check.R
+# 15_cohort_matrix_check.R
 # Structural check of the replication matrix against discovery.
 # Produces: data check
-# Run     : Rscript scripts/05_replication/16_cohort_matrix_check.R   (from the repository root)
+# Run     : Rscript scripts/05_replication/15_cohort_matrix_check.R   (from the repository root)
 # ==============================================================================
 # Structural check of the replication matrix against discovery.
 # Key question: are the motif columns aligned with their headers, and do the

@@ -11,7 +11,6 @@
 ## Same method as 01_geneset_scores.R, restricted to the AP-1 genes of genes.dissoc:
 ##   FOS, FOSB, JUN, JUNB, JUND (Fos- and Jun-related) and ATF3 (ATF/AP-1 bZIP partner).
 ## AddModuleScore(features = list(genes.AP1), ctrl = 20, name = "AP1_score") -> meta-data column "AP1_score1".
-## Step 1 of 2 (scoring, signac_env). Step 2 = 03_ap1_score_plots.R (R 4.5.1; violins + per-cell-type scatters).
 ## Outputs, results/motif_sets/geneset_scores/:
 ##   {main,replication}_AP1_score_per_cell.csv     cell, celltype, nFeature_RNA, AP1_score1, genes_dissoc1 (from the full run)
 ##   {main,replication}_AP1_score_by_celltype.csv
