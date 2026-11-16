@@ -12,6 +12,7 @@ preferred-citation:
   type: article
   title: "Integration of single-cell multi-omics data with GWAS reveals key transcriptional regulators underlying susceptibility to triple-negative breast cancer"
   year: 2026
+  status: submitted
   authors:
     - family-names: Liang
       given-names: Ying

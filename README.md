@@ -2,10 +2,9 @@
 
 Analysis code for:
 
-> Liang Y, Wang X, Lee M, Yang Y, Cai Q, Long J, Chandarlapaty S, Guo X, Buas MF, Shu X.
-> **Integration of single-cell multi-omics data with GWAS reveals key transcriptional regulators
-> underlying susceptibility to triple-negative breast cancer.** Manuscript in preparation (2026).
-> DOI: _to be added on publication_
+> Liang Y, et al. **Integration of single-cell multi-omics data with GWAS reveals key
+> transcriptional regulators underlying susceptibility to triple-negative breast cancer.**
+> Manuscript under submission (2026). DOI: _to be added on publication_
 
 ## Overview
 
