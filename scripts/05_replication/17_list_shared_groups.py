@@ -1,18 +1,17 @@
 # ==============================================================================
-# 18_list_shared_groups.py
+# 17_list_shared_groups.py
 # List TF families significant in both cohorts.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/18_list_shared_groups.py   (from the repository root)
+# Run     : python3 scripts/05_replication/17_list_shared_groups.py   (from the repository root)
 # ==============================================================================
-"""18_list_shared_groups.py — name the groups significant in BOTH cohorts.
+"""17_list_shared_groups.py — name the groups significant in BOTH cohorts.
 
-Lists, for one response and one group level, the groups that are Bonferroni-
+Lists, for one response, the TF families that are Bonferroni-
 significant in discovery AND in replication under the group model tested
 directly, with their member motifs, TF names and TFClass families.
 
-  python3 18_list_shared_groups.py [RESPONSE] [LEVEL]
+  python3 17_list_shared_groups.py [RESPONSE]
       RESPONSE  TNBC | LuminalA | LuminalB | LuminalB_HER2Neg | HER2 | OverallBC
-      LEVEL     JASPAR122 | TFfamily        (default JASPAR122)
 
 Locations from GROUP_REF / OBS_RESULTS; defaults assume the project layout under $TNBC_ROOT.
 """
@@ -21,8 +20,8 @@ import csv, io, os, sys, collections
 REF = os.environ.get("GROUP_REF",   "reference")
 V   = os.environ.get("OBS_RESULTS", "replication/tfgwas_grouped")
 RESP  = sys.argv[1] if len(sys.argv) > 1 else "TNBC"
-LEVEL = sys.argv[2] if len(sys.argv) > 2 else "JASPAR122"
-MAPF  = {"JASPAR122": "group_JASPAR122.csv", "TFfamily": "group_TFfamily.csv"}[LEVEL]
+LEVEL = "TFfamily"
+MAPF  = "group_TFfamily.csv"
 
 def rd(fn, d=REF):
     with io.open(os.path.join(d, fn), encoding="utf-8-sig") as fh:

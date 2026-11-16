@@ -1,22 +1,21 @@
 # ==============================================================================
-# 16_summary_tables.py
+# 15_summary_tables.py
 # Summary counts of significant and subtype-unique units per level.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/16_summary_tables.py   (from the repository root)
+# Run     : python3 scripts/05_replication/15_summary_tables.py   (from the repository root)
 # ==============================================================================
-"""16_summary_tables.py — the per-response summary tables for one cohort.
+"""15_summary_tables.py — the per-response summary tables for one cohort.
 
 Reproduces, for the motif (727) model:
   (1) Bonferroni-significant motifs
-  (2) distinct JASPAR122 clusters those motifs belong to
-  (3) distinct TF families those motifs belong to
-  (4) motifs unique vs the other four subtypes   (+ clusters/families they span)
-  (5) motifs unique vs overall BC                    (+ clusters/families they span)
-and the same counts for the JASPAR122 and TF-family models tested directly.
+  (2) distinct TF families those motifs belong to
+  (3) motifs unique vs the other four subtypes   (+ families they span)
+  (4) motifs unique vs overall BC                    (+ families they span)
+and the same counts for the TF-family model tested directly.
 
 "Unique vs other subtypes" = significant in this response and in none of the other
 four subtypes. "Unique vs overall BC" = significant in this subtype but not in overall BC.
-For the overall BC row, unique is against the union of all five subtypes and column (5)
+For the overall BC row, unique is against the union of all five subtypes and column (4)
 is not defined.
 
 Locations are configurable; defaults assume the project layout under $TNBC_ROOT. No hardcoded paths.
@@ -34,9 +33,8 @@ def load_map(fn):
     with io.open(os.path.join(REF, fn), encoding="utf-8-sig") as fh:
         return {r["motif_id"]: r["group"] for r in csv.DictReader(fh)}
 
-cl  = load_map("group_JASPAR122.csv")
 fam = load_map("group_TFfamily.csv")
-NC, NF = len(set(cl.values())), len(set(fam.values()))
+NF = len(set(fam.values()))
 
 def sig(level, key):
     p = os.path.join(V, f"obs_{COHORT}_{level}_{key}.csv")
@@ -58,7 +56,7 @@ if any(v is None for v in M.values()):
 span = lambda s, m: len({m[x] for x in s if x in m})
 
 print(f"{COHORT.upper()} — motif level (727 tests, Bonferroni p < {0.05/727:.2e})\n")
-hdr = f"{'Response':<21}{'Sig':>5}{'Clusters':>10}{'Families':>10}" \
+hdr = f"{'Response':<21}{'Sig':>5}{'Families':>10}" \
       f"{'Unique vs subtypes':>21}{'Unique vs overall BC':>22}"
 print(hdr); print("-" * len(hdr))
 for k, lab in RESP:
@@ -67,13 +65,13 @@ for k, lab in RESP:
              else set().union(*[M[x] for x in SUB])
     u1 = s - others
     u2 = None if k == "OverallBC" else s - M["OverallBC"]
-    f1 = f"{len(u1)} ({span(u1,cl)}c / {span(u1,fam)}f)"
-    f2 = "—" if u2 is None else f"{len(u2)} ({span(u2,cl)}c / {span(u2,fam)}f)"
-    print(f"{lab:<21}{len(s):>5}{span(s,cl):>10}{span(s,fam):>10}{f1:>21}{f2:>22}")
+    f1 = f"{len(u1)} ({span(u1,fam)}f)"
+    f2 = "—" if u2 is None else f"{len(u2)} ({span(u2,fam)}f)"
+    print(f"{lab:<21}{len(s):>5}{span(s,fam):>10}{f1:>21}{f2:>22}")
 
-print(f"\n(clusters out of {NC}; families out of {NF})")
+print(f"\n(families out of {NF})")
 
-for lvl, N in (("JASPAR122", NC), ("TFfamily", NF)):
+for lvl, N in (("TFfamily", NF),):
     G = {k: sig(lvl, k) for k, _ in RESP}
     if any(v is None for v in G.values()):
         continue

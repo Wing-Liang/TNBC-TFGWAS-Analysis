@@ -53,25 +53,6 @@ TNBC-TFGWAS-Analysis/
 └── scripts/              analysis code, folders 01–09
 ```
 
-Folders can be relocated with environment variables:
-
-| Variable | Contents | Default |
-|---|---|---|
-| `TNBC_ROOT` | project root (contains `data/`, `results/`, `replication/`) | `.` |
-| `BCAC_DIR` | BCAC/CIMBA subtype and overall breast-cancer GWAS summary statistics | `data/BCAC` |
-| `LDBLOCK_DIR` | `pyrho_EUR_LD_blocks.bed`, `hg19ToHg38.over.chain` | `data/LDblocks` |
-| `LIFTOVER_DIR` | `hg19ToHg38.over.chain` | `data/liftover` |
-| `KG_DIR` | 1000 Genomes EUR reference: PLINK panel `1kg.v3/EUR` (motifbreakR) and `1000G.EUR.QC.plink.simple.vcf` (rsIDs for MAGMA) | `data/1KG` |
-| `GTEX_DIR` | GTEx / eQTL Catalogue files | `data/GTEx` |
-| `TCGA_DIR` | TCGA-BRCA expression object and GENCODE v36 annotation | `data/TCGA` |
-| `DEPMAP_DIR` | DepMap `CRISPRGeneEffect_25Q3.csv`, `Model.csv` | `data/DepMap` |
-| `MAGMA_DIR` | MAGMA inputs and gene-level results (scDRS) | `data/MAGMA` |
-| `LDLINK_TOKEN` | personal LDlink API token (locus plots only) | — |
-
-Run-time options used by individual scripts: `VIPER_MINSIZE` (default 5, as reported),
-`MOTIF_SET`, `OVERALLBC_COHORT`, `GROUP_REF` (default `reference/`) and `OBS_RESULTS`; see each
-script's header.
-
 ## Requirements
 
 - R 4.4.3 with Signac 1.16.0, Seurat 5.5.1, chromVAR 1.30.1, motifmatchr 1.30.0, JASPAR2022,
@@ -84,29 +65,26 @@ script's header.
 
 ## Data
 
-No data are included in this repository. Download each dataset from its source and save it in
-the local folder given in the last column (the defaults can be changed with the environment
-variables above):
+No data are included in this repository. All inputs are public or available on application:
 
-| Data | Source | Local folder |
-|---|---|---|
-| Discovery scRNA-/scATAC-seq, 4 donors | GEO [GSE162798](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE162798) | `data/GSE162798/` |
-| Replication 10x Multiome, pools 9/11/12, 15 donors | GEO [GSE244585](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE244585); CELLxGENE collection `77446b76-1c2d-4a71-8e59-0efd4374d98e` | `replication/data/` (downloaded by `05_replication/01_download_geo_data.sh`) |
-| Breast-cancer subtype GWAS (`icogs_onco_meta_intrinsic_subtypes_summary_stats_zhang_2020.zip`) and overall-BC GWAS (Zhang et al. 2020) | Breast Cancer Association Consortium (BCAC), [GWAS summary associations](https://www.ccge.medschl.cam.ac.uk/breast-cancer-association-consortium-bcac/data-data-access/summary-results/gwas-summary-associations) | `$BCAC_DIR` |
-| LD blocks (pyrho EUR, GRCh38) | [jmacdon/LDblocks_GRCh38](https://github.com/jmacdon/LDblocks_GRCh38) | `$LDBLOCK_DIR` |
-| GRCh37 → GRCh38 chain | UCSC `hg19ToHg38.over.chain.gz` | `$LDBLOCK_DIR`, `$LIFTOVER_DIR` |
-| 1000 Genomes Phase 3 EUR panel | 1000 Genomes Project | `$KG_DIR/1kg.v3/` |
-| 1000 Genomes EUR SNP reference VCF (rsIDs) | [scPagwas](https://github.com/sulab-wmu/scPagwas) reference data, `1000G.EUR.QC.plink.simple.vcf` | `$KG_DIR` |
-| GTEx v8 breast cis-eQTL summary statistics | eQTL Catalogue `QTD000211` | `$GTEX_DIR/eQTL_v8/` |
-| GTEx v11 breast expression and v9 WGS genotypes (Fig 5D–H) | dbGaP `phs000424` (controlled access) | `$GTEX_DIR/v11/` |
-| TCGA-BRCA RNA-seq and PAM50 calls | Genomic Data Commons (Data Release 44.0), downloaded by `08_tcga_viper_depmap/01_download_tcga_brca.R` | `results/tcga/`, `$TCGA_DIR` |
-| CRISPR gene effects | DepMap Public 25Q3 | `$DEPMAP_DIR` |
-| TF motifs | JASPAR 2022 (`JASPAR2022` Bioconductor package) | — |
-| LD for locus plots | LDlink (`LDlinkR`) | — |
+| Data | Source |
+|---|---|
+| Discovery scRNA-/scATAC-seq, 4 donors | GEO [GSE162798](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE162798) |
+| Replication 10x Multiome, pools 9/11/12, 15 donors | GEO [GSE244585](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE244585); CELLxGENE collection `77446b76-1c2d-4a71-8e59-0efd4374d98e`; downloaded by `05_replication/01_download_geo_data.sh` |
+| Breast-cancer subtype GWAS (`icogs_onco_meta_intrinsic_subtypes_summary_stats_zhang_2020.zip`) and overall-BC GWAS (Zhang et al. 2020) | Breast Cancer Association Consortium (BCAC), [GWAS summary associations](https://www.ccge.medschl.cam.ac.uk/breast-cancer-association-consortium-bcac/data-data-access/summary-results/gwas-summary-associations) |
+| LD blocks (pyrho EUR, GRCh38) | [jmacdon/LDblocks_GRCh38](https://github.com/jmacdon/LDblocks_GRCh38) |
+| GRCh37 → GRCh38 chain | UCSC `hg19ToHg38.over.chain.gz` |
+| 1000 Genomes Phase 3 EUR panel | 1000 Genomes Project |
+| 1000 Genomes EUR SNP reference VCF (rsIDs) | [scPagwas](https://github.com/sulab-wmu/scPagwas) reference data, `1000G.EUR.QC.plink.simple.vcf` |
+| GTEx v8 breast cis-eQTL summary statistics | eQTL Catalogue `QTD000211` |
+| GTEx v11 breast expression and v9 WGS genotypes (Fig 5D–H) | dbGaP `phs000424` (controlled access) |
+| TCGA-BRCA RNA-seq and PAM50 calls | Genomic Data Commons (Data Release 44.0), downloaded by `08_tcga_viper_depmap/01_download_tcga_brca.R` |
+| CRISPR gene effects | DepMap Public 25Q3 |
+| TF motifs | JASPAR 2022 (`JASPAR2022` Bioconductor package) |
+| LD for locus plots | LDlink (`LDlinkR`) |
 
-`reference/` holds small lookup tables used by the scripts (the 727 tested motif IDs, motif →
-TF family and JASPAR 2022 cluster assignments, promoter-SNP target genes), derived from
-JASPAR 2022 (CC BY 4.0).
+`reference/` holds small lookup tables used by the scripts (the 727 tested motif IDs, motif → TF
+family assignments, promoter-SNP target genes), derived from JASPAR 2022 (CC BY 4.0).
 
 ## Citation
 

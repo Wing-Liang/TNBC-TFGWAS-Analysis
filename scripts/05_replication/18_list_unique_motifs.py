@@ -1,15 +1,15 @@
 # ==============================================================================
-# 19_list_unique_motifs.py
+# 18_list_unique_motifs.py
 # List subtype-unique motifs in both cohorts.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/19_list_unique_motifs.py   (from the repository root)
+# Run     : python3 scripts/05_replication/18_list_unique_motifs.py   (from the repository root)
 # ==============================================================================
-"""19_list_unique_motifs.py — name the UNIQUE significant motifs shared by both cohorts.
+"""18_list_unique_motifs.py — name the UNIQUE significant motifs shared by both cohorts.
 
 Motif model (727 tests). Uniqueness is computed inside each cohort, then intersected:
 a motif is listed only if it is unique in discovery AND unique in replication.
 
-  python3 19_list_unique_motifs.py [RESPONSE] [MODE]
+  python3 18_list_unique_motifs.py [RESPONSE] [MODE]
       RESPONSE  TNBC | LuminalA | LuminalB | LuminalB_HER2Neg | HER2   (default TNBC)
       MODE      sub     = unique vs the other four subtypes  (default)
                 overall = unique vs overall BC
@@ -26,7 +26,6 @@ MODE = sys.argv[2] if len(sys.argv) > 2 else "sub"
 def rd(fn):
     with io.open(os.path.join(REF, fn), encoding="utf-8-sig") as fh:
         return list(csv.DictReader(fh))
-cl  = {r["motif_id"]: r["group"] for r in rd("group_JASPAR122.csv")}
 fam = {r["motif_id"]: r["group"] for r in rd("group_TFfamily.csv")}
 tf  = {r["motif_id"]: r["tf"] for r in rd("jaspar_tf_family.csv")} \
       if os.path.exists(os.path.join(REF, "jaspar_tf_family.csv")) else {}
@@ -57,8 +56,8 @@ both = sorted(d & r, key=lambda m: -T[("discovery",RESP)].get(m, 0))
 label = {"sub":"unique vs other subtypes","overall":"unique vs overall BC","all":"all significant motifs"}[MODE]
 print(f"{RESP} — motif model, {label}")
 print(f"discovery {len(d)}, replication {len(r)}, shared {len(both)}\n")
-print(f"{'motif':<11}{'TF':<15}{'t_disc':>8}{'t_repl':>8}  {'cluster':<12}{'TF family'}")
+print(f"{'motif':<11}{'TF':<15}{'t_disc':>8}{'t_repl':>8}  {'TF family'}")
 print("-"*95)
 for m in both:
     print(f"{m:<11}{tf.get(m,''):<15}{T[('discovery',RESP)].get(m,float('nan')):>+8.2f}"
-          f"{T[('replication',RESP)].get(m,float('nan')):>+8.2f}  {cl.get(m,''):<12}{fam.get(m,'')[:40]}")
+          f"{T[('replication',RESP)].get(m,float('nan')):>+8.2f}  {fam.get(m,'')[:40]}")

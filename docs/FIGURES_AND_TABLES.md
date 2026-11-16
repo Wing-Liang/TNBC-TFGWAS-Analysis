@@ -47,9 +47,9 @@ listed in the folder READMEs; the tables below name the scripts that draw each p
 | S3 | SNP × open-chromatin counts per motif | `03_tf_gwas` | `01_build_variant_motif_matrix.R` |
 | S4 | TF-GWAS results, discovery, subtypes and overall BC | `03_tf_gwas` | `02_tfgwas_model.R`, `03_build_overall_bc_gwas.R`, `04_tfgwas_overall_bc.R` |
 | S5 | Dunn's test of module scores | `04_celltype_enrichment` | `03_subtype_specific_motifs.R` |
-| S6 | Canonical marker detection, both cohorts | `05_replication` | `22_marker_detection_by_cohort.R` |
-| S7 | TF-GWAS results, replication | `05_replication` | `06b_motif_matrix.R`, `07a_split_motif_batches.R`, `07b_tfgwas_model.R`, `08_tfgwas_combine.R`, `09a`–`09e` (overall BC), `14_motif_master_table.py` |
-| S8 | Replication by TF family | `05_replication` | `13_tf_family_models.R`, `11_tf_family_annotation.R`, `15`–`22` |
+| S6 | Canonical marker detection, both cohorts | `05_replication` | `19_marker_detection_by_cohort.R` |
+| S7 | TF-GWAS results, replication | `05_replication` | `06b_motif_matrix.R`, `07a_split_motif_batches.R`, `07b_tfgwas_model.R`, `08_tfgwas_combine.R`, `09a`–`09e` (overall BC), `13_motif_master_table.py` |
+| S8 | Replication by TF family | `05_replication` | `10_tf_family_annotation.R`, `11_peaks_per_motif.R`, `12_tf_family_models.R`, `13_motif_master_table.py`, `15`–`18` |
 | S9 | DESeq2, 61 TF genes, TCGA-BRCA | `08_tcga_viper_depmap` | `02_tcga_deseq2_tf_genes.R` |
 | S10 | TF activity (msVIPER), 61 TF genes | `08_tcga_viper_depmap` | `04_viper_tf_activity.R`, `04_run_viper.sh`, `06_table_tf_activity.py` |
 | S11 | DepMap gene effects, TF genes | `08_tcga_viper_depmap` | `07_depmap_tf_genes.R` |

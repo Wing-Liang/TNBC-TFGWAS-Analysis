@@ -1,12 +1,11 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 12_peaks_per_motif.R
+# 11_peaks_per_motif.R
 # Count peaks carrying each motif in both cohorts.
 # Produces: Table S8 (input)
 # Inputs  : reference/st4_motif_ids.txt
-#           reference/group_JASPAR122.csv
 #           reference/group_TFfamily.csv
-# Run     : Rscript scripts/05_replication/12_peaks_per_motif.R   (from the repository root)
+# Run     : Rscript scripts/05_replication/11_peaks_per_motif.R   (from the repository root)
 # ==============================================================================
 # Per-motif peak counts for both cohorts, joined to the per-motif variant counts
 # from the two GWAS matrices.
@@ -58,18 +57,16 @@ VR <- varcount("replication/tfgwas/replication_variant_peak_motif_GWAS_ALL.csv.g
 setnames(VR, "v", "variants_replication")
 
 ids <- readLines("reference/st4_motif_ids.txt"); ids <- ids[nzchar(ids)]
-map <- fread("reference/group_JASPAR122.csv")
 famm <- fread("reference/group_TFfamily.csv")
 tab <- data.table(motif = ids)
 tab <- merge(tab, D,  by = "motif", all.x = TRUE)
 tab <- merge(tab, VD, by = "motif", all.x = TRUE)
 tab <- merge(tab, R,  by = "motif", all.x = TRUE)
 tab <- merge(tab, VR, by = "motif", all.x = TRUE)
-tab <- merge(tab, map[,  .(motif = motif_id, jaspar122 = group)], by = "motif", all.x = TRUE)
 tab <- merge(tab, famm[, .(motif = motif_id, tf_family = group)], by = "motif", all.x = TRUE)
 tab[, `:=`(peak_ratio = round(peaks_replication/peaks_discovery, 3),
            variant_ratio = round(variants_replication/variants_discovery, 3))]
-setcolorder(tab, c("motif","jaspar122","tf_family","peaks_discovery","variants_discovery",
+setcolorder(tab, c("motif","tf_family","peaks_discovery","variants_discovery",
                    "peaks_replication","variants_replication","peak_ratio","variant_ratio"))
 setorder(tab, -variants_discovery)
 fwrite(tab, OUT)

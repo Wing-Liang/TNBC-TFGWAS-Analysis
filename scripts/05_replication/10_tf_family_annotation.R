@@ -1,31 +1,24 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 11_tf_family_annotation.R
+# 10_tf_family_annotation.R
 # Annotate motifs with TFClass transcription-factor families.
 # Produces: reference/group_TFfamily.csv
-# Run     : Rscript scripts/05_replication/11_tf_family_annotation.R   (from the repository root)
+# Run     : Rscript scripts/05_replication/10_tf_family_annotation.R   (from the repository root)
 # ==============================================================================
-# 11_tf_family_annotation.R — TFClass family / class for the 727 tested motifs
+# 10_tf_family_annotation.R — TFClass family / class for the 727 tested motifs
 #
-# R port of 46_tf_family_fetch.ps1, so the TF-family grouping can be regenerated
-# on the HPC cluster rather than only on the Windows workstation.
+# Produces the 94-family grouping used by the TF-family models and Table S8.
 #
-# Produces the 94-family grouping used by the grouped TF-GWAS models.
-#
-# WHY PER-MATRIX CALLS AND NOT A BULK FILE
-#   JASPAR publishes no annotation table for the 2022 vertebrates CORE clustering
-#   (.../2022/vertebrates/CORE/radial_trees/annotation_table.txt returns 404), and
-#   the list endpoint /api/v1/matrix/?collection=CORE&tax_group=vertebrates returns
-#   only matrix_id, name, collection, base_id, version, sequence_logo, url — class
-#   and family exist ONLY on the per-matrix endpoint. Hence 727 calls.
-#   Runtime a few minutes. the compute host needs outbound access to the JASPAR API.
+# TF class and family are available only from the per-matrix endpoint of the JASPAR
+# REST API, so the script makes one call per motif (727 calls, a few minutes; the
+# host needs outbound access to the JASPAR API).
 #
 # INPUT   reference/st4_motif_ids.txt
 # OUTPUT  reference/jaspar_tf_family.csv   motif_id, tf, class, family
 #         reference/group_TFfamily.csv     motif_id, group  (group = family)
 #
 # Verify against the existing mapping rather than overwriting blind:
-#   Rscript scripts/05_replication/11_tf_family_annotation.R --check
+#   Rscript scripts/05_replication/10_tf_family_annotation.R --check
 # writes to *_new.csv and diffs against the current files.
 
 suppressPackageStartupMessages({ library(jsonlite); library(data.table) })

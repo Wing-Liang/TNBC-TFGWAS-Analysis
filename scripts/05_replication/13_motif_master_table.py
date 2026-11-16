@@ -1,8 +1,8 @@
 # ==============================================================================
-# 14_motif_master_table.py
+# 13_motif_master_table.py
 # Per-motif table: peak and variant counts, significance and subtype-uniqueness flags, both cohorts.
 # Produces: Tables S7-S8
-# Run     : python3 scripts/05_replication/14_motif_master_table.py   (from the repository root)
+# Run     : python3 scripts/05_replication/13_motif_master_table.py   (from the repository root)
 # ==============================================================================
 """Per-motif master table: peak/variant counts in both cohorts, plus Bonferroni
 significance and subtype-uniqueness flags for every response in both cohorts."""
@@ -36,7 +36,7 @@ for c in ("discovery","replication"):
 tf  = {r["motif_id"]: r["tf"] for r in csv.DictReader(io.open(os.path.join(REF,"jaspar_tf_family.csv"), encoding="utf-8-sig"))}
 base = list(csv.DictReader(io.open(os.path.join(SP,"peaks_per_motif.csv"), encoding="utf-8-sig")))
 
-cols = ["motif","motif_name","jaspar122","tf_family",
+cols = ["motif","motif_name","tf_family",
         "peaks_discovery","variants_discovery","peaks_replication","variants_replication",
         "peak_ratio","variant_ratio"]
 for c,ct in (("discovery","disc"),("replication","repl")):
@@ -49,7 +49,7 @@ for c,ct in (("discovery","disc"),("replication","repl")):
 out = []
 for r in base:
     m = r["motif"]
-    row = {c: r.get(c,"") for c in cols[:10]}
+    row = {c: r.get(c,"") for c in cols[:9]}
     row["motif"] = m; row["motif_name"] = tf.get(m,"")
     for c,ct in (("discovery","disc"),("replication","repl")):
         for k,lab in RESP:

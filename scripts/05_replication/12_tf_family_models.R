@@ -1,15 +1,15 @@
 #!/usr/bin/env Rscript
 # ==============================================================================
-# 13_tf_family_models.R
-# TF-GWAS at motif, TF-family and JASPAR-cluster level.
+# 12_tf_family_models.R
+# TF-GWAS at motif and TF-family level.
 # Produces: Table S8
-# Run     : Rscript scripts/05_replication/13_tf_family_models.R   (from the repository root)
+# Run     : Rscript scripts/05_replication/12_tf_family_models.R   (from the repository root)
 # ==============================================================================
 # =============================================================================
-# 13_tf_family_models.R -- TF-GWAS at motif, TF-family and JASPAR-cluster level (Table S8)
+# 12_tf_family_models.R -- TF-GWAS at motif and TF-family level (Table S8)
 #
 # One pass over a cohort's matrix; for every response (5 subtypes + overall BC) and
-# every level (motif 727 / JASPAR122 / TF family 94) computes the observed
+# every level (motif 727 / TF family 94) computes the observed
 # t statistic, p value and Bonferroni significance.
 #
 # Model, identical to the permutation pipeline:
@@ -18,7 +18,7 @@
 #   member motif of that group (union / logical OR). At motif level each motif is
 #   its own group, reproducing the published scan.
 #
-# Bonferroni denominator is the number of tests AT THAT LEVEL (727 / 122 / 94).
+# Bonferroni denominator is the number of tests AT THAT LEVEL (727 / 94).
 #
 # Build: rotation is irrelevant here (no permutation), but rows are still ordered
 # on the cohort's own overlap build for reproducibility -- discovery hg19 `Pos`,
@@ -32,17 +32,17 @@ POSCOL  <- Sys.getenv("OBS_POSCOL", "Pos")
 COHORT  <- Sys.getenv("OBS_COHORT", "discovery")
 OUTDIR  <- Sys.getenv("OBS_OUT",    "replication/tfgwas_grouped")
 OVERALL_FILE <- "replication/tfgwas/OverallBC_chisq_hg38.rds"
-MAPS    <- c(motif = "reference/group_motif.csv",
-             JASPAR122 = "reference/group_JASPAR122.csv",
-             TFfamily  = "reference/group_TFfamily.csv")
+MOTIFS  <- "reference/st4_motif_ids.txt"
+FAMILY  <- "reference/group_TFfamily.csv"
 ALPHA   <- 0.05
 setDTthreads(as.integer(Sys.getenv("SLURM_CPUS_PER_TASK", "4")))
 dir.create(OUTDIR, showWarnings = FALSE, recursive = TRUE)
 ts <- function(...) message("[", format(Sys.time(), "%H:%M:%S"), "] ", ...)
 ts("cohort=", COHORT, " poscol=", POSCOL)
 
-maps <- lapply(MAPS, fread)
-motif_order <- maps$motif$motif_id
+motif_order <- readLines(MOTIFS); motif_order <- motif_order[nzchar(motif_order)]
+maps <- list(motif    = data.table(motif_id = motif_order, group = motif_order),  # each motif its own group
+             TFfamily = fread(FAMILY))
 
 hdr <- names(fread(CSV, nrows = 0))
 motif_cols <- setdiff(grep("^MA", hdr, value = TRUE), "Chromatin")
@@ -91,7 +91,7 @@ Xm <- sparseMatrix(i = unlist(cols, use.names=FALSE),
 for (cc in motif_order) set(dat, j = cc, value = NULL); rm(cols); gc()
 
 designs <- list()
-for (lv in names(MAPS)) {
+for (lv in names(maps)) {
   g <- factor(maps[[lv]]$group[match(motif_order, maps[[lv]]$motif_id)])
   M <- sparseMatrix(i = seq_along(g), j = as.integer(g), x = 1,
                     dims = c(length(g), nlevels(g)))

@@ -1,19 +1,19 @@
 # ==============================================================================
-# 17_cross_cohort_overlap.py
+# 16_cross_cohort_overlap.py
 # Overlap of significant units between cohorts.
 # Produces: Table S8
-# Run     : python3 scripts/05_replication/17_cross_cohort_overlap.py   (from the repository root)
+# Run     : python3 scripts/05_replication/16_cross_cohort_overlap.py   (from the repository root)
 # ==============================================================================
-"""17_cross_cohort_overlap.py — discovery vs replication overlap, all three levels.
+"""16_cross_cohort_overlap.py — discovery vs replication overlap, motif and TF-family levels.
 
 Motif model (727), per response:
   discovery / replication / overlap of Bonferroni-significant motifs, and the
-  cohort-only remainders; the JASPAR122 clusters and TF families those motifs
+  cohort-only remainders; the TF families those motifs
   span in each cohort and the overlap of those group sets; and the overlap of the
   "unique vs other subtypes" and "unique vs overall BC" sets (i.e. motifs unique in
   discovery AND unique in replication).
 
-Group models (JASPAR122, TF family) tested directly: discovery / replication /
+TF-family model tested directly: discovery / replication /
 overlap of significant groups.
 
 Uniqueness is computed within each cohort separately, then intersected — a motif
@@ -31,7 +31,7 @@ V   = os.environ.get("OBS_RESULTS", "replication/tfgwas_grouped")
 def load_map(fn):
     with io.open(os.path.join(REF, fn), encoding="utf-8-sig") as fh:
         return {r["motif_id"]: r["group"] for r in csv.DictReader(fh)}
-cl, fam = load_map("group_JASPAR122.csv"), load_map("group_TFfamily.csv")
+fam = load_map("group_TFfamily.csv")
 
 def sig(cohort, level, key):
     p = os.path.join(V, f"obs_{cohort}_{level}_{key}.csv")
@@ -60,22 +60,19 @@ span = lambda s, m: {m[x] for x in s if x in m}
 
 print(f"MOTIF MODEL (727 tests, Bonferroni p < {0.05/727:.2e}) — discovery vs replication\n")
 h = (f"{'Response':<21}{'Disc':>6}{'Repl':>6}{'Both':>6}"
-     f"{'J122_D':>8}{'J122_R':>8}{'J122_ovl':>9}"
      f"{'Fam_D':>7}{'Fam_R':>7}{'Fam_ovl':>8}")
 print(h); print("-" * len(h))
 for k, lab in RESP:
     d, r = M["discovery"][k], M["replication"][k]
-    cd, cr = span(d, cl),  span(r, cl)
     fd, fr = span(d, fam), span(r, fam)
     print(f"{lab:<21}{len(d):>6}{len(r):>6}{len(d&r):>6}"
-          f"{len(cd):>8}{len(cr):>8}{len(cd&cr):>9}"
           f"{len(fd):>7}{len(fr):>7}{len(fd&fr):>8}")
 
 # ---- same layout, restricted to the UNIQUE significant motifs ----------------
 # Uniqueness is computed inside each cohort, then the cohorts are compared:
 #   Disc/Repl = size of that cohort's unique set
 #   Both      = motifs unique in BOTH cohorts
-#   J122/Fam  = clusters / families those unique motifs span, and their overlap
+#   Fam       = families those unique motifs span, and their overlap
 for tag, fn, rows in (
         ("UNIQUE vs OTHER SUBTYPES", uniq_sub, RESP),
         ("UNIQUE vs OVERALL BC",         uniq_overall, [(k, l) for k, l in RESP if k != "OverallBC"])):
@@ -83,21 +80,18 @@ for tag, fn, rows in (
     print(f"MOTIF MODEL - {tag} (Bonferroni p < {0.05/727:.2e})")
     print("")
     h3 = (f"{'Response':<21}{'Disc':>6}{'Repl':>6}{'Both':>6}"
-          f"{'J122_D':>8}{'J122_R':>8}{'J122_ovl':>9}"
           f"{'Fam_D':>7}{'Fam_R':>7}{'Fam_ovl':>8}")
     print(h3); print("-" * len(h3))
     for k, lab in rows:
         d, r = fn("discovery", k), fn("replication", k)
-        cd, cr = span(d, cl),  span(r, cl)
         fd, fr = span(d, fam), span(r, fam)
         print(f"{lab:<21}{len(d):>6}{len(r):>6}{len(d&r):>6}"
-              f"{len(cd):>8}{len(cr):>8}{len(cd&cr):>9}"
               f"{len(fd):>7}{len(fr):>7}{len(fd&fr):>8}")
 
-for lvl in ("JASPAR122", "TFfamily"):
+for lvl in ("TFfamily",):
     G = {c: {k: sig(c, lvl, k) for k, _ in RESP} for c in COH}
     if any(v is None for c in COH for v in G[c].values()): continue
-    n = len(set(cl.values())) if lvl == "JASPAR122" else len(set(fam.values()))
+    n = len(set(fam.values()))
     print(f"\n{lvl} MODEL tested directly ({n} tests, Bonferroni p < {0.05/n:.2e})\n")
     h2 = f"{'Response':<21}{'Disc':>6}{'Repl':>6}{'Overlap':>9}{'DiscOnly':>10}{'ReplOnly':>10}"
     print(h2); print("-" * len(h2))

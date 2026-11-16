@@ -1,14 +1,14 @@
 # ==============================================================================
-# 22_marker_detection_by_cohort.R
+# 19_marker_detection_by_cohort.R
 # Canonical marker detection by cell type in both cohorts.
 # Produces: Table S6
 # Inputs  : results/singlecell/final_cell_barcodes.csv
 #           results/singlecell/atac_motif.rds
 #           replication/rna/replication_RNA_annotated.rds
 # Outputs : results/motif_sets/marker_compare_main_vs_replication.csv
-# Run     : Rscript scripts/05_replication/22_marker_detection_by_cohort.R   (from the repository root)
+# Run     : Rscript scripts/05_replication/19_marker_detection_by_cohort.R   (from the repository root)
 # ==============================================================================
-## 22_marker_detection_by_cohort.R — canonical marker detection (% cells > 0) and mean log-normalised expression per cell
+## 19_marker_detection_by_cohort.R — canonical marker detection (% cells > 0) and mean log-normalised expression per cell
 ## type, main (GSE162798) vs replication (GSE244585), (Table S6)..
 ## ---- paths (set the environment variables; see README) ----
 TNBC_ROOT <- Sys.getenv("TNBC_ROOT", ".")
