@@ -35,23 +35,6 @@ Each folder's `README.md` lists its scripts in run order with what each one prod
 [`docs/FIGURES_AND_TABLES.md`](docs/FIGURES_AND_TABLES.md) maps every figure panel and table to
 its script. Every script starts with a header giving its purpose, inputs, outputs and run command.
 
-## Running the analysis
-
-Run every script from the repository root. Inputs are read from `data/`, outputs are written to
-`results/`; the replication cohort uses its own working folder `replication/` (with its raw
-inputs in `replication/data/`). None of these folders is tracked by git.
-
-```
-TNBC-TFGWAS-Analysis/
-├── data/                 public inputs (see "Data" below)
-├── replication/          GSE244585 working folder: data/, qc/, peaks/, tfgwas/, ...
-├── results/              all discovery-cohort outputs
-│   ├── singlecell/   ld_blocks/   gwas/   tfgwas/   motif_sets/   motifbreakR/
-│   └── coloc/   target_genes/   tcga/   tf_activity/   scdrs/
-├── reference/            small lookup tables shipped with the code
-└── scripts/              analysis code, folders 01–09
-```
-
 ## Requirements
 
 - R 4.4.3 with Signac 1.16.0, Seurat 5.5.1, chromVAR 1.30.1, motifmatchr 1.30.0, JASPAR2022,
