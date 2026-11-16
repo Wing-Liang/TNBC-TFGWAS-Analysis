@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article below."
+title: "TNBC TF-GWAS: analysis code"
+type: software
+license: MIT
+authors:
+  - family-names: Liang
+    given-names: Ying
+  - family-names: Shu
+    given-names: Xiang
+preferred-citation:
+  type: article
+  title: "Integration of single-cell multi-omics data with GWAS reveals key transcriptional regulators underlying susceptibility to triple-negative breast cancer"
+  year: 2026
+  authors:
+    - family-names: Liang
+      given-names: Ying
+    - family-names: Wang
+      given-names: Xinjun
+    - family-names: Lee
+      given-names: Minna
+    - family-names: Yang
+      given-names: Yaohua
+    - family-names: Cai
+      given-names: Qiuyin
+    - family-names: Long
+      given-names: Jirong
+    - family-names: Chandarlapaty
+      given-names: Sarat
+    - family-names: Guo
+      given-names: Xingyi
+    - family-names: Buas
+      given-names: Matthew F.
+    - family-names: Shu
+      given-names: Xiang
+  # journal and doi: add on publication
