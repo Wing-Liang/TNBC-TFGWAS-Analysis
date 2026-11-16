@@ -53,7 +53,7 @@ No data are included in this repository. All inputs are public or available on a
 |---|---|
 | Discovery scRNA-/scATAC-seq, 4 donors | GEO [GSE162798](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE162798) |
 | Replication 10x Multiome, pools 9/11/12, 15 donors | GEO [GSE244585](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE244585); CELLxGENE collection `77446b76-1c2d-4a71-8e59-0efd4374d98e`; downloaded by `05_replication/01_download_geo_data.sh` |
-| Breast-cancer subtype GWAS (`icogs_onco_meta_intrinsic_subtypes_summary_stats_zhang_2020.zip`) and overall-BC GWAS (Zhang et al. 2020) | Breast Cancer Association Consortium (BCAC), [GWAS summary associations](https://www.ccge.medschl.cam.ac.uk/breast-cancer-association-consortium-bcac/data-data-access/summary-results/gwas-summary-associations) |
+| Breast-cancer subtype GWAS and overall-BC GWAS (Zhang et al. 2020) | Breast Cancer Association Consortium (BCAC), [GWAS summary associations](https://www.ccge.medschl.cam.ac.uk/breast-cancer-association-consortium-bcac/data-data-access/summary-results/gwas-summary-associations) |
 | LD blocks (pyrho EUR, GRCh38) | [jmacdon/LDblocks_GRCh38](https://github.com/jmacdon/LDblocks_GRCh38) |
 | GRCh37 → GRCh38 chain | UCSC `hg19ToHg38.over.chain.gz` |
 | 1000 Genomes Phase 3 EUR panel | 1000 Genomes Project |
