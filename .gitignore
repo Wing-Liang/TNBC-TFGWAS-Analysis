@@ -1,0 +1,37 @@
+# data and outputs are never committed -- see README "Data availability"
+data/
+replication/
+results*/
+logs/
+*.rds
+*.RData
+*.Rhistory
+*.h5
+*.h5ad
+*.h5seurat
+*.mtx
+*.mtx.gz
+*.tsv.gz
+*.csv.gz
+*.bed
+*.bam
+*.vcf*
+*.pdf
+*.png
+.Rproj.user/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+
+
+# R session / credential files (from the GitHub R template) -- .Renviron may hold LDLINK_TOKEN
+.Renviron
+.httr-oauth
+.Rapp.history
+.RDataTmp
+.Ruserdata
+*_cache/
+/cache/
+*.utf8.md
+*.knit.md
+rsconnect/
