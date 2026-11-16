@@ -19,6 +19,11 @@ breast-cancer risk:
 fitted genome-wide for overall breast cancer and five intrinsic subtypes, using peaks from joint
 scRNA-/scATAC-seq of normal breast tissue, and repeated in an independent single-cell cohort.
 
+<p align="center">
+  <img src="docs/figure1.png" alt="Figure 1. Overview of the study workflow" width="700">
+</p>
+<p align="center"><b>Figure 1.</b> Overview of the study workflow.</p>
+
 | Folder (`scripts/`) | Analysis | Figures / tables |
 |---|---|---|
 | `01_singlecell_annotation` | scRNA-/scATAC-seq QC, peak calling, cell-type annotation, motif annotation and chromVAR (GSE162798) | Fig 2, Table S1 |
@@ -57,7 +62,7 @@ No data are included in this repository. All inputs are public or available on a
 | LD blocks (pyrho EUR, GRCh38) | [jmacdon/LDblocks_GRCh38](https://github.com/jmacdon/LDblocks_GRCh38) |
 | GRCh37 → GRCh38 chain | UCSC `hg19ToHg38.over.chain.gz` |
 | 1000 Genomes Phase 3 EUR panel | 1000 Genomes Project |
-| 1000 Genomes EUR SNP reference VCF (rsIDs) | [scPagwas](https://github.com/sulab-wmu/scPagwas) reference data, `1000G.EUR.QC.plink.simple.vcf` |
+| 1000 Genomes EUR SNP reference VCF (rsIDs) | `1000G.EUR.QC.plink.simple.vcf` |
 | GTEx v8 breast cis-eQTL summary statistics | eQTL Catalogue `QTD000211` |
 | GTEx v11 breast expression and v9 WGS genotypes (Fig 5D–H) | dbGaP `phs000424` (controlled access) |
 | TCGA-BRCA RNA-seq and PAM50 calls | Genomic Data Commons (Data Release 44.0), downloaded by `08_tcga_viper_depmap/01_download_tcga_brca.R` |
