@@ -7,7 +7,7 @@
 #           replication/rna/replication_RNA_annotated.rds
 # Run     : Rscript scripts/06_dissociation_ap1/02_dissociation_ap1_scores.R   (from the repository root)
 # ==============================================================================
-## 02_dissociation_ap1_scores.R — AP-1 subset of the dissociation signature, scored across cells (tutorial §8.8).
+## 02_dissociation_ap1_scores.R — AP-1 subset of the dissociation signature, scored across cells.
 ## Same method as 01_geneset_scores.R, restricted to the AP-1 genes of genes.dissoc:
 ##   FOS, FOSB, JUN, JUNB, JUND (Fos- and Jun-related) and ATF3 (ATF/AP-1 bZIP partner).
 ## AddModuleScore(features = list(genes.AP1), ctrl = 20, name = "AP1_score") -> meta-data column "AP1_score1".

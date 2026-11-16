@@ -25,7 +25,10 @@
 # INPUT   results/singlecell/atac_motif.rds                         discovery chromVAR
 #         replication/tfgwas/replication_chromvar.rds               replication chromVAR
 #         replication/data/cellxgene/embeddings_replication.csv     replication UMAP
-#         replication/tfgwas_grouped/motif_cpg_vs_ratio.csv         TRE/CRE definition
+#         reference/jaspar_tf_family.csv                            TF family of each motif
+# AP-1 motifs are the Jun-, Fos- and B-ATF-related matrices (45). They are split by the expected
+# number of CpG dinucleotides in the JASPAR2022 matrix, sum_i P(C at i) * P(G at i+1): TRE
+# (TGA(C/G)TCA, CpG-free) < 0.5 <= CRE (TGACGTCA), giving 29 TRE and 16 CRE matrices.
 # OUTPUT  replication/tfgwas_grouped/ap1_tre_umap_cells.csv
 #         replication/tfgwas_grouped/ap1_tre_reweight.csv
 #         replication/figures/atac/AP1_TRE_UMAP.pdf / .png
@@ -35,6 +38,7 @@ TNBC_ROOT <- Sys.getenv("TNBC_ROOT", ".")
 suppressPackageStartupMessages({
   library(Seurat); library(Signac); library(data.table)
   library(ggplot2); library(patchwork)
+  library(JASPAR2022); library(TFBSTools)
 })
 setwd(TNBC_ROOT)
 ts <- function(...) message("[", format(Sys.time(), "%H:%M:%S"), "] ", ...)
@@ -43,11 +47,17 @@ FIG <- "replication/figures/atac"
 dir.create(FIG, showWarnings = FALSE, recursive = TRUE)
 CACHE <- file.path(RES, "ap1_tre_umap_cells.csv")
 
-M <- fread(file.path(RES, "motif_cpg_vs_ratio.csv"))
+GROUP_REF <- Sys.getenv("GROUP_REF", "reference")
 AP1 <- c("Jun-related", "Fos-related", "B-ATF-related")
-M[, ap1 := grepl(paste(AP1, collapse = "|"), tf_family)]
-TRE <- M[ap1 == TRUE & cpg_expected <  0.5, motif]
-CRE <- M[ap1 == TRUE & cpg_expected >= 0.5, motif]
+M <- fread(file.path(GROUP_REF, "jaspar_tf_family.csv"))[grepl(paste(AP1, collapse = "|"), family)]
+cpg_expected <- function(id) {
+  m <- Matrix(getMatrixByID(JASPAR2022, ID = id)); p <- sweep(m, 2, colSums(m), "/")
+  sum(p["C", -ncol(p)] * p["G", -1])
+}
+M[, cpg_expected := vapply(motif_id, cpg_expected, numeric(1))]
+TRE <- M[cpg_expected <  0.5, motif_id]
+CRE <- M[cpg_expected >= 0.5, motif_id]
+stopifnot(length(TRE) == 29, length(CRE) == 16)
 ts(sprintf("TRE matrices %d | CRE matrices %d", length(TRE), length(CRE)))
 
 HARM <- c(

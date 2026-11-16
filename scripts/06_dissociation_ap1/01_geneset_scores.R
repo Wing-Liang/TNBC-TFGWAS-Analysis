@@ -2,7 +2,8 @@
 ## Per-cell gene-set scores in both cohorts (Seurat "gene set expression across cells"):
 ##   (i)  cell cycle -- S and G2/M phase genes (Tirosh et al. 2015; Seurat cc.genes.updated.2019),
 ##        CellCycleScoring -> S.Score, G2M.Score, Phase;
-##   (ii) dissociation stress -- genes induced by tissue dissociation (van den Brink et al. 2017),
+##   (ii) dissociation stress -- the 32-gene core signature induced by tissue dissociation
+##        (O'Flanagan et al. 2019, Genome Biol 20:210),
 ##        AddModuleScore(ctrl = 20, name = "genes_dissoc") -> genes_dissoc1.
 ## Each score is plotted against the number of detected genes per cell and summarised by cell type,
 ## so the dissociation score can be compared with AP-1 motif enrichment by cell type.
