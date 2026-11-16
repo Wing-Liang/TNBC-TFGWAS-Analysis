@@ -6,6 +6,6 @@ Run the scripts in the order listed, from the repository root (see the main READ
 
 | Script | What it does | Produces |
 |---|---|---|
-| `01_prepare_gwas_inputs.R` | Per-subtype GWAS tables (BCAC and GWAS Catalog) for MAGMA. | Fig S10 |
+| `01_prepare_gwas_inputs.R` | Per-subtype BCAC GWAS tables for MAGMA. | Fig S10 |
 | `02_scdrs.R` | MAGMA gene-level GWAS statistics and scDRS cell-level disease scores per subtype. | Fig S10 |
 | `03_scdrs_figure.R` | scDRS cell-type enrichment dot plots. | Fig S10 |

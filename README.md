@@ -62,7 +62,6 @@ Folders can be relocated with environment variables:
 | `LDBLOCK_DIR` | `pyrho_EUR_LD_blocks.bed`, `hg19ToHg38.over.chain` | `data/LDblocks` |
 | `LIFTOVER_DIR` | `hg19ToHg38.over.chain` | `data/liftover` |
 | `KG_DIR` | 1000 Genomes EUR reference: PLINK panel `1kg.v3/EUR` (motifbreakR) and `1000G.EUR.QC.plink.simple.vcf` (rsIDs for MAGMA) | `data/1KG` |
-| `GWASCAT_DIR` | GWAS Catalog harmonised summary statistics GCST90454344–GCST90454348 | `data/GWASCatalog` |
 | `GTEX_DIR` | GTEx / eQTL Catalogue files | `data/GTEx` |
 | `TCGA_DIR` | TCGA-BRCA expression object and GENCODE v36 annotation | `data/TCGA` |
 | `DEPMAP_DIR` | DepMap `CRISPRGeneEffect_25Q3.csv`, `Model.csv` | `data/DepMap` |
@@ -85,14 +84,15 @@ script's header.
 
 ## Data
 
-No data are included. All inputs are public or available on application:
+No data are included in this repository. Download each dataset from its source and save it in
+the local folder given in the last column (the defaults can be changed with the environment
+variables above):
 
-| Data | Source | Place in |
+| Data | Source | Local folder |
 |---|---|---|
 | Discovery scRNA-/scATAC-seq, 4 donors | GEO [GSE162798](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE162798) | `data/GSE162798/` |
 | Replication 10x Multiome, pools 9/11/12, 15 donors | GEO [GSE244585](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE244585); CELLxGENE collection `77446b76-1c2d-4a71-8e59-0efd4374d98e` | `replication/data/` (downloaded by `05_replication/01_download_geo_data.sh`) |
-| Breast-cancer subtype GWAS (`icogs_onco_meta_intrinsic_subtypes_summary_stats_zhang_2020.zip`) and overall-BC GWAS (Zhang et al. 2020) | Breast Cancer Association Consortium (BCAC) | `$BCAC_DIR` |
-| Subtype GWAS, harmonised releases GCST90454344–GCST90454348 (scDRS comparison) | [GWAS Catalog](https://www.ebi.ac.uk/gwas/) | `$GWASCAT_DIR` |
+| Breast-cancer subtype GWAS (`icogs_onco_meta_intrinsic_subtypes_summary_stats_zhang_2020.zip`) and overall-BC GWAS (Zhang et al. 2020) | Breast Cancer Association Consortium (BCAC), [GWAS summary associations](https://www.ccge.medschl.cam.ac.uk/breast-cancer-association-consortium-bcac/data-data-access/summary-results/gwas-summary-associations) | `$BCAC_DIR` |
 | LD blocks (pyrho EUR, GRCh38) | [jmacdon/LDblocks_GRCh38](https://github.com/jmacdon/LDblocks_GRCh38) | `$LDBLOCK_DIR` |
 | GRCh37 → GRCh38 chain | UCSC `hg19ToHg38.over.chain.gz` | `$LDBLOCK_DIR`, `$LIFTOVER_DIR` |
 | 1000 Genomes Phase 3 EUR panel | 1000 Genomes Project | `$KG_DIR/1kg.v3/` |
@@ -104,9 +104,9 @@ No data are included. All inputs are public or available on application:
 | TF motifs | JASPAR 2022 (`JASPAR2022` Bioconductor package) | — |
 | LD for locus plots | LDlink (`LDlinkR`) | — |
 
-`reference/` holds small lookup tables used by the scripts (motif → TF family and JASPAR 2022
-cluster assignments, gene panels), derived from JASPAR 2022 (CC BY 4.0) or from published gene
-sets cited in the Methods.
+`reference/` holds small lookup tables used by the scripts (the 727 tested motif IDs, motif →
+TF family and JASPAR 2022 cluster assignments, promoter-SNP target genes), derived from
+JASPAR 2022 (CC BY 4.0).
 
 ## Citation
 

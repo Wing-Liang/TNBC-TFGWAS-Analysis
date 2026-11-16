@@ -5,9 +5,7 @@
 # Inputs  : results/singlecell/atac_RNA_annotated.rds
 #           results/singlecell/final_cell_barcodes.csv
 #           results/gwas/bcac_gwas_filtered_TNBC.csv
-#           results/gwas/TNBC_filtered_GWASCatalog.csv
 #           results/gwas/bcac_gwas_filtered_LumA.csv
-#           results/gwas/LumA_filtered_GWASCatalog.csv
 #           results/gwas/bcac_gwas_filtered_LumB.csv
 #           ...
 # Outputs : results/scdrs/rna_breastcancer.h5ad
@@ -118,14 +116,6 @@ names(TNBC_gwas)<-c('CHR','BP','SNP','P')
 TNBC_gwas$N <-106377
 TNBC_gwas$SNP <- ifelse(TNBC_gwas$SNP == "", paste0("Chr", TNBC_gwas$CHR, "_", TNBC_gwas$BP), TNBC_gwas$SNP)
 fwrite(TNBC_gwas, file.path(MAGMA_DIR, "input_gwas/TNBC.pval"), sep = "\t", row.names = FALSE)
-# GWAS Catalog - TNBC
-TNBC_filt<-fread('results/gwas/TNBC_filtered_GWASCatalog.csv', header = TRUE)
-TNBC_filt <- TNBC_filt %>% select(chrom, pos, rsid, p)
-names(TNBC_filt)<-c('CHR','BP','SNP','P')
-TNBC_filt$N <-106377
-table(TNBC_filt$SNP == "")
-fwrite(TNBC_filt, file.path(MAGMA_DIR, "input_gwas/TNBC_GWASCatalog.pval"), sep = "\t", row.names = FALSE)
-
 # LumA
 LumA_gwas <- fread("results/gwas/bcac_gwas_filtered_LumA.csv", header = TRUE)
 LumA_gwas <- LumA_gwas %>% select(chrom, pos, rsid, p)
@@ -133,14 +123,6 @@ names(LumA_gwas)<-c('CHR','BP','SNP','P')
 LumA_gwas$N <-148877
 LumA_gwas$SNP <- ifelse(LumA_gwas$SNP == "", paste0("Chr", LumA_gwas$CHR, "_", LumA_gwas$BP), LumA_gwas$SNP)
 fwrite(LumA_gwas, file.path(MAGMA_DIR, "input_gwas/LumA.pval"), sep = "\t", row.names = FALSE)
-# GWAS Catalog - LumA
-LumA_filt<-fread('results/gwas/LumA_filtered_GWASCatalog.csv', header = TRUE)
-LumA_filt <- LumA_filt %>% select(chrom, pos, rsid, p)
-names(LumA_filt)<-c('CHR','BP','SNP','P')
-LumA_filt$N <-148877
-table(LumA_filt$SNP == "")
-fwrite(LumA_filt, file.path(MAGMA_DIR, "input_gwas/LumA_GWASCatalog.pval"), sep = "\t", row.names = FALSE)
-
 # LumB
 LumB_gwas <- fread("results/gwas/bcac_gwas_filtered_LumB.csv", header = TRUE)
 LumB_gwas <- LumB_gwas %>% select(chrom, pos, rsid, p)
@@ -148,14 +130,6 @@ names(LumB_gwas)<-c('CHR','BP','SNP','P')
 LumB_gwas$N <-105277
 LumB_gwas$SNP <- ifelse(LumB_gwas$SNP == "", paste0("Chr", LumB_gwas$CHR, "_", LumB_gwas$BP), LumB_gwas$SNP)
 fwrite(LumB_gwas, file.path(MAGMA_DIR, "input_gwas/LumB.pval"), sep = "\t", row.names = FALSE)
-# GWAS Catalog - LumB
-LumB_filt<-fread('results/gwas/LumB_filtered_GWASCatalog.csv', header = TRUE)
-LumB_filt <- LumB_filt %>% select(chrom, pos, rsid, p)
-names(LumB_filt)<-c('CHR','BP','SNP','P')
-LumB_filt$N <-105277
-table(LumB_filt$SNP == "")
-fwrite(LumB_filt, file.path(MAGMA_DIR, "input_gwas/LumB_GWASCatalog.pval"), sep = "\t", row.names = FALSE)
-
 # LumB_HER2Neg
 LumB_HER2Neg_gwas <- fread("results/gwas/bcac_gwas_filtered_LumB_HER2Neg.csv", header = TRUE)
 LumB_HER2Neg_gwas <- LumB_HER2Neg_gwas %>% select(chrom, pos, rsid, p)
@@ -164,14 +138,6 @@ LumB_HER2Neg_gwas$N <-105277
 LumB_HER2Neg_gwas$SNP <- ifelse(LumB_HER2Neg_gwas$SNP == "",
                                 paste0("Chr", LumB_HER2Neg_gwas$CHR, "_", LumB_HER2Neg_gwas$BP), LumB_HER2Neg_gwas$SNP)
 fwrite(LumB_HER2Neg_gwas, file.path(MAGMA_DIR, "input_gwas/LumB_HER2Neg.pval"), sep = "\t", row.names = FALSE)
-# GWAS Catalog - LumB_HER2Neg
-LumB_HER2Neg_filt<-fread('results/gwas/LumB_HER2Neg_filtered_GWASCatalog.csv', header = TRUE)
-LumB_HER2Neg_filt <- LumB_HER2Neg_filt %>% select(chrom, pos, rsid, p)
-names(LumB_HER2Neg_filt)<-c('CHR','BP','SNP','P')
-LumB_HER2Neg_filt$N <-105277
-table(LumB_HER2Neg_filt$SNP == "")
-fwrite(LumB_HER2Neg_filt, file.path(MAGMA_DIR, "input_gwas/LumB_HER2Neg_GWASCatalog.pval"), sep = "\t", row.names = FALSE)
-
 # HER2
 HER2_gwas <- fread("results/gwas/bcac_gwas_filtered_HER2.csv", header = TRUE)
 HER2_gwas <- HER2_gwas %>% select(chrom, pos, rsid, p)
@@ -180,14 +146,6 @@ HER2_gwas$N <-105277
 HER2_gwas$SNP <- ifelse(HER2_gwas$SNP == "",
                                 paste0("Chr", HER2_gwas$CHR, "_", HER2_gwas$BP), HER2_gwas$SNP)
 fwrite(HER2_gwas, file.path(MAGMA_DIR, "input_gwas/HER2.pval"), sep = "\t", row.names = FALSE)
-# GWAS Catalog - HER2
-HER2_filt<-fread('results/gwas/HER2_filtered_GWASCatalog.csv', header = TRUE)
-HER2_filt <- HER2_filt %>% select(chrom, pos, rsid, p)
-names(HER2_filt)<-c('CHR','BP','SNP','P')
-HER2_filt$N <-105277
-table(HER2_filt$SNP == "")
-fwrite(HER2_filt, file.path(MAGMA_DIR, "input_gwas/HER2_GWASCatalog.pval"), sep = "\t", row.names = FALSE)
-
 # MAGMA instruction
 # https://github.com/martinjzhang/scDRS/issues/2
 
@@ -216,15 +174,6 @@ fwrite(HER2_filt, file.path(MAGMA_DIR, "input_gwas/HER2_GWASCatalog.pval"), sep 
 # magma_v1.10/magma --bfile g1000_eur/g1000_eur --pval input_gwas/HER2.pval use='SNP,P' ncol='N' --gene-annot out/step1.genes.annot --out out/HER2
 # check output
 # head out/LumA.genes.out
-
-# GWAS catalog
-# magma_v1.10/magma --bfile g1000_eur/g1000_eur --pval input_gwas/TNBC_GWASCatalog.pval use='SNP,P' ncol='N' --gene-annot out/step1_hg38.genes.annot --out out/TNBC_GWASCatalog
-# magma_v1.10/magma --bfile g1000_eur/g1000_eur --pval input_gwas/LumA_GWASCatalog.pval use='SNP,P' ncol='N' --gene-annot out/step1_hg38.genes.annot --out out/LumA_GWASCatalog
-# magma_v1.10/magma --bfile g1000_eur/g1000_eur --pval input_gwas/LumB_GWASCatalog.pval use='SNP,P' ncol='N' --gene-annot out/step1_hg38.genes.annot --out out/LumB_GWASCatalog
-# magma_v1.10/magma --bfile g1000_eur/g1000_eur --pval input_gwas/LumB_HER2Neg_GWASCatalog.pval use='SNP,P' ncol='N' --gene-annot out/step1_hg38.genes.annot --out out/LumB_HER2Neg_GWASCatalog
-# magma_v1.10/magma --bfile g1000_eur/g1000_eur --pval input_gwas/HER2_GWASCatalog.pval use='SNP,P' ncol='N' --gene-annot out/step1_hg38.genes.annot --out out/HER2_GWASCatalog
-# check output
-# head out/LumA_GWASCatalog.genes.out
 
 # Step 3: Convert Ensembl IDs to HGNC Symbols
 library(biomaRt)
@@ -255,32 +204,6 @@ magma_genes_unique <- magma_genes %>%
 magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
 fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/TNBC_hgnc.genes.out"), sep = "\t", row.names = FALSE)
 
-# ------------TNBC_GWASCatalog---------------
-magma_genes <- fread(file.path(MAGMA_DIR, "out/TNBC_GWASCatalog.genes.out"), header = TRUE)
-ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
-gene_map <- getBM(
-  attributes = c("entrezgene_id", "hgnc_symbol"),
-  filters = "entrezgene_id",
-  values = magma_genes$GENE,
-  mart = ensembl
-)
-# Remove empty or NA HGNC symbols
-gene_map <- gene_map[!is.na(gene_map$hgnc_symbol) & gene_map$hgnc_symbol != "", ]
-# Merge with MAGMA output
-magma_genes <- merge(magma_genes, gene_map, by.x = "GENE", by.y = "entrezgene_id")
-# Select relevant columns
-magma_genes <- magma_genes[, c("hgnc_symbol", "ZSTAT")]
-#18104 genes
-colnames(magma_genes) <- c("GENE", "ZSTAT")
-magma_genes_unique <- magma_genes %>%
-  group_by(GENE) %>%
-  summarise(ZSTAT = ZSTAT[which.max(abs(ZSTAT))]) %>%
-  ungroup()
-# 18027 genes
-magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
-head(magma_genes_unique)
-fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/TNBC_GWASCatalog_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-
 # --------------LumA --------------------
 magma_genes <- fread(file.path(MAGMA_DIR, "out/LumA.genes.out"), header = TRUE)
 ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
@@ -305,32 +228,6 @@ magma_genes_unique <- magma_genes %>%
 # 18113 genes
 magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
 fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/LumA_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-# --------------LumA_GWASCatalog --------------------
-magma_genes <- fread(file.path(MAGMA_DIR, "out/LumA_GWASCatalog.genes.out"), header = TRUE)
-ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
-gene_map <- getBM(
-  attributes = c("entrezgene_id", "hgnc_symbol"),
-  filters = "entrezgene_id",
-  values = magma_genes$GENE,
-  mart = ensembl
-)
-# Remove empty or NA HGNC symbols
-gene_map <- gene_map[!is.na(gene_map$hgnc_symbol) & gene_map$hgnc_symbol != "", ]
-# Merge with MAGMA output
-magma_genes <- merge(magma_genes, gene_map, by.x = "GENE", by.y = "entrezgene_id")
-# Select relevant columns
-magma_genes <- magma_genes[, c("hgnc_symbol", "ZSTAT")]
-#18104 genes
-colnames(magma_genes) <- c("GENE", "ZSTAT")
-magma_genes_unique <- magma_genes %>%
-  group_by(GENE) %>%
-  summarise(ZSTAT = ZSTAT[which.max(abs(ZSTAT))]) %>%
-  ungroup()
-# 18027 genes
-magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
-head(magma_genes_unique)
-fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/LumA_GWASCatalog_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-
 # --------------LumB --------------------
 magma_genes <- fread(file.path(MAGMA_DIR, "out/LumB.genes.out"), header = TRUE)
 ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
@@ -355,32 +252,6 @@ magma_genes_unique <- magma_genes %>%
 # 18113 genes
 magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
 fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/LumB_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-# --------------LumB_GWASCatalog --------------------
-magma_genes <- fread(file.path(MAGMA_DIR, "out/LumB_GWASCatalog.genes.out"), header = TRUE)
-ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
-gene_map <- getBM(
-  attributes = c("entrezgene_id", "hgnc_symbol"),
-  filters = "entrezgene_id",
-  values = magma_genes$GENE,
-  mart = ensembl
-)
-# Remove empty or NA HGNC symbols
-gene_map <- gene_map[!is.na(gene_map$hgnc_symbol) & gene_map$hgnc_symbol != "", ]
-# Merge with MAGMA output
-magma_genes <- merge(magma_genes, gene_map, by.x = "GENE", by.y = "entrezgene_id")
-# Select relevant columns
-magma_genes <- magma_genes[, c("hgnc_symbol", "ZSTAT")]
-#18104 genes
-colnames(magma_genes) <- c("GENE", "ZSTAT")
-magma_genes_unique <- magma_genes %>%
-  group_by(GENE) %>%
-  summarise(ZSTAT = ZSTAT[which.max(abs(ZSTAT))]) %>%
-  ungroup()
-# 18027 genes
-magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
-head(magma_genes_unique)
-fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/LumB_GWASCatalog_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-
 # --------------LumB_HER2Neg --------------------
 magma_genes <- fread(file.path(MAGMA_DIR, "out/LumB_HER2Neg.genes.out"), header = TRUE)
 ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
@@ -405,32 +276,6 @@ magma_genes_unique <- magma_genes %>%
 # 18113 genes
 magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
 fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/LumB_HER2Neg_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-# --------------LumB_HER2Neg_GWASCatalog --------------------
-magma_genes <- fread(file.path(MAGMA_DIR, "out/LumB_HER2Neg_GWASCatalog.genes.out"), header = TRUE)
-ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
-gene_map <- getBM(
-  attributes = c("entrezgene_id", "hgnc_symbol"),
-  filters = "entrezgene_id",
-  values = magma_genes$GENE,
-  mart = ensembl
-)
-# Remove empty or NA HGNC symbols
-gene_map <- gene_map[!is.na(gene_map$hgnc_symbol) & gene_map$hgnc_symbol != "", ]
-# Merge with MAGMA output
-magma_genes <- merge(magma_genes, gene_map, by.x = "GENE", by.y = "entrezgene_id")
-# Select relevant columns
-magma_genes <- magma_genes[, c("hgnc_symbol", "ZSTAT")]
-#18104 genes
-colnames(magma_genes) <- c("GENE", "ZSTAT")
-magma_genes_unique <- magma_genes %>%
-  group_by(GENE) %>%
-  summarise(ZSTAT = ZSTAT[which.max(abs(ZSTAT))]) %>%
-  ungroup()
-# 18027 genes
-magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
-head(magma_genes_unique)
-fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/LumB_HER2Neg_GWASCatalog_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-
 # --------------HER2 --------------------
 magma_genes <- fread(file.path(MAGMA_DIR, "out/HER2.genes.out"), header = TRUE)
 ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
@@ -455,32 +300,6 @@ magma_genes_unique <- magma_genes %>%
 # 18113 genes
 magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
 fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/HER2_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-# --------------HER2_GWASCatalog --------------------
-magma_genes <- fread(file.path(MAGMA_DIR, "out/HER2_GWASCatalog.genes.out"), header = TRUE)
-ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
-gene_map <- getBM(
-  attributes = c("entrezgene_id", "hgnc_symbol"),
-  filters = "entrezgene_id",
-  values = magma_genes$GENE,
-  mart = ensembl
-)
-# Remove empty or NA HGNC symbols
-gene_map <- gene_map[!is.na(gene_map$hgnc_symbol) & gene_map$hgnc_symbol != "", ]
-# Merge with MAGMA output
-magma_genes <- merge(magma_genes, gene_map, by.x = "GENE", by.y = "entrezgene_id")
-# Select relevant columns
-magma_genes <- magma_genes[, c("hgnc_symbol", "ZSTAT")]
-#18104 genes
-colnames(magma_genes) <- c("GENE", "ZSTAT")
-magma_genes_unique <- magma_genes %>%
-  group_by(GENE) %>%
-  summarise(ZSTAT = ZSTAT[which.max(abs(ZSTAT))]) %>%
-  ungroup()
-# 18027 genes
-magma_genes_unique <- magma_genes_unique[order(-magma_genes_unique$ZSTAT),]
-head(magma_genes_unique)
-fwrite(magma_genes_unique, file.path(MAGMA_DIR, "out/HER2_GWASCatalog_hgnc.genes.out"), sep = "\t", row.names = FALSE)
-
 # Step 4: Create .gs File with scdrs munge-gs
 library(reticulate)
 py_config()  # Verify Python environment
@@ -507,27 +326,6 @@ subprocess.run('%s', shell=True, check=True)
 gs <- fread("results/scdrs/TNBC.gs", sep = "\t", header = TRUE)
 head(gs)
 
-#TNBC_GWASCatalog
-munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/TNBC_GWASCatalog_hgnc.genes.out --weight zscore --out-file results/scdrs/TNBC_GWASCatalog.gs")
-py_run_string(sprintf("
-import subprocess
-subprocess.run('%s', shell=True, check=True)
-", munge_command))
-# Print info for the first 3 traits and first 10 genes
-# Traits               ['ZSTAT']
-# ESR1                 [7.8152]
-# TMEM221              [7.6243]
-# NXNL1                [7.0921]
-# RBX1                 [6.1676]
-# CCDC91               [6.1315]
-# BST2                 [6.1094]
-# MDM4                 [6.1094]
-# MVB12A               [6.1094]
-# PIK3C2B              [6.1094]
-# PLVAP                [6.1094
-gs <- fread("results/scdrs/TNBC_GWASCatalog.gs", sep = "\t", header = TRUE)
-head(gs)
-
 #LumA
 munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/LumA_hgnc.genes.out --weight zscore --out-file results/scdrs/LumA.gs")
 py_run_string(sprintf("
@@ -550,28 +348,6 @@ subprocess.run('%s', shell=True, check=True)
 # --zscore-file have values above 1 or below 0. Seems fine.
 gs <- fread("results/scdrs/LumA.gs", sep = "\t", header = TRUE)
 head(gs)
-#LumA_GWASCatalog
-munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/LumA_GWASCatalog_hgnc.genes.out --weight zscore --out-file results/scdrs/LumA_GWASCatalog.gs")
-py_run_string(sprintf("
-import subprocess
-subprocess.run('%s', shell=True, check=True)
-", munge_command))
-# --zscore-file loaded: n_gene=18027, n_trait=1 (sys_time=0.0s)
-# Print info for the first 3 traits and first 10 genes
-# Traits               ['ZSTAT']
-# TNS1                 [10.249]
-# NEK10                [9.0611]
-# CCDC91               [8.3565]
-# DNAJC1               [8.2714]
-# GPM6A                [8.2427]
-# ITPR1                [8.2076]
-# ST13                 [8.0577]
-# SLC25A21             [8.0374]
-# ATRNL1               [8.0352]
-# RAD51B               [7.9406]
-gs <- fread("results/scdrs/LumA_GWASCatalog.gs", sep = "\t", header = TRUE)
-head(gs)
-
 #LumB
 munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/LumB_hgnc.genes.out --weight zscore --out-file results/scdrs/LumB.gs")
 py_run_string(sprintf("
@@ -594,28 +370,6 @@ subprocess.run('%s', shell=True, check=True)
 # --zscore-file have values above 1 or below 0. Seems fine.
 gs <- fread("results/scdrs/LumB.gs", sep = "\t", header = TRUE)
 head(gs)
-#LumB_GWASCatalog
-munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/LumB_GWASCatalog_hgnc.genes.out --weight zscore --out-file results/scdrs/LumB_GWASCatalog.gs")
-py_run_string(sprintf("
-import subprocess
-subprocess.run('%s', shell=True, check=True)
-", munge_command))
-# --zscore-file loaded: n_gene=18027, n_trait=1 (sys_time=0.0s)
-# Print info for the first 3 traits and first 10 genes
-# Traits               ['ZSTAT']
-# TOX3                 [6.4008]
-# ANKRD55              [6.2445]
-# PEX14                [6.1008]
-# TNNT3                [6.0017]
-# LPAR1                [5.5192]
-# LSP1                 [5.4779]
-# ESR1                 [4.9682]
-# NEK10                [4.7534]
-# MRPL23               [4.6707]
-# TNS1                 [4.5118]
-gs <- fread("results/scdrs/LumB_GWASCatalog.gs", sep = "\t", header = TRUE)
-head(gs)
-
 #LumB_HER2Neg
 munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/LumB_HER2Neg_hgnc.genes.out --weight zscore --out-file results/scdrs/LumB_HER2Neg.gs")
 py_run_string(sprintf("
@@ -636,27 +390,6 @@ subprocess.run('%s', shell=True, check=True)
 # ZBTB38               [5.101]
 # --zscore-file have values above 1 or below 0. Seems fine.
 gs <- fread("results/scdrs/LumB_HER2Neg.gs", sep = "\t", header = TRUE)
-#LumB_HER2Neg_GWASCatalog
-munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/LumB_HER2Neg_GWASCatalog_hgnc.genes.out --weight zscore --out-file results/scdrs/LumB_HER2Neg_GWASCatalog.gs")
-py_run_string(sprintf("
-import subprocess
-subprocess.run('%s', shell=True, check=True)
-", munge_command))
-# -zscore-file loaded: n_gene=18027, n_trait=1 (sys_time=0.0s)
-# Print info for the first 3 traits and first 10 genes
-# Traits               ['ZSTAT']
-# TNS1                 [7.0071]
-# ESR1                 [6.8823]
-# TOX3                 [6.6382]
-# NEK10                [6.6371]
-# ANKRD55              [6.4066]
-# LPAR1                [6.015]
-# IL6ST                [5.8525]
-# SLC4A7               [5.6063]
-# NIPSNAP1             [5.2846]
-# SPSB4                [5.046]
-gs <- fread("results/scdrs/LumB_HER2Neg_GWASCatalog.gs", sep = "\t", header = TRUE)
-
 #HER2
 munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/HER2_hgnc.genes.out --weight zscore --out-file results/scdrs/HER2.gs")
 py_run_string(sprintf("
@@ -677,27 +410,6 @@ subprocess.run('%s', shell=True, check=True)
 # SYNE1                [3.7143]
 # --zscore-file have values above 1 or below 0. Seems fine.
 gs <- fread("results/scdrs/HER2.gs", sep = "\t", header = TRUE)
-#HER2_GWASCatalog
-munge_command <- sprintf("scdrs munge-gs --zscore-file ${MAGMA_DIR}/out/HER2_GWASCatalog_hgnc.genes.out --weight zscore --out-file results/scdrs/HER2_GWASCatalog.gs")
-py_run_string(sprintf("
-import subprocess
-subprocess.run('%s', shell=True, check=True)
-", munge_command))
-# --zscore-file loaded: n_gene=18027, n_trait=1 (sys_time=0.0s)
-# Print info for the first 3 traits and first 10 genes
-# Traits               ['ZSTAT']
-# PEX14                [6.1425]
-# ESR1                 [5.116]
-# TOX3                 [4.3395]
-# LGR6                 [4.0157]
-# SYNE1                [3.9584]
-# ARHGEF10L            [3.9151]
-# TMBIM1               [3.7316]
-# TRPV4                [3.7286]
-# LRRTM1               [3.7127]
-# PNKD                 [3.6603]
-gs <- fread("results/scdrs/HER2_GWASCatalog.gs", sep = "\t", header = TRUE)
-
 #-------- Validate Genes ----------
 library(reticulate)
 library(data.table)
@@ -738,23 +450,6 @@ print('Matched genes sample:', np.intersect1d(gs_genes, h5ad_genes)[:10])
 # Gene overlap: 0.923
 # Matched genes sample: ['AADAC' 'ABAT' 'ABCB4' 'ABCB8' 'ABHD15' 'ABHD8' 'ACADVL' 'ACAT1' 'ACBD4'
 #                        'ACSBG1']
-
-gs_GWASCatalog <- fread("results/scdrs/TNBC_GWASCatalog.gs", sep = "\t", header = TRUE)
-gs_GWASCatalog_string <- paste(strsplit(gs_GWASCatalog$GENESET, ",")[[1]], collapse=",")
-py_run_string(sprintf("
-import anndata
-import numpy as np
-adata = anndata.read_h5ad('results/scdrs/rna_breastcancer.h5ad')
-gs_GWASCatalog = '%s'
-gs_GWASCatalog_genes = [x.split(':')[0] for x in gs_GWASCatalog.split(',')]
-h5ad_genes = adata.var_names
-overlap = len(np.intersect1d(gs_GWASCatalog_genes, h5ad_genes)) / len(gs_GWASCatalog_genes)
-print('Gene overlap:', overlap)
-print('Matched genes sample:', np.intersect1d(gs_GWASCatalog_genes, h5ad_genes)[:10])
-", gs_GWASCatalog_string))
-# Gene overlap: 0.919
-# Matched genes sample: ['AADACL4' 'AAMP' 'ABCA12' 'ABHD1' 'ABLIM1' 'ACAT1' 'ACBD4' 'ACOXL'
-#                        'ADAMTS17' 'ADCY3']
 
 # Run scdrs compute-score
 # Create a Covariate File
@@ -797,19 +492,6 @@ system(cli_command)
 
 list.files("results/scdrs/output_TNBC/")
 
-# ----------------TNBC_GWASCatalog------------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-gs_file <- "results/scdrs/TNBC_GWASCatalog.gs"
-out_dir <- "results/scdrs/output_TNBC_GWASCatalog/"
-
-cli_command <- sprintf(
-  "scdrs compute-score --h5ad-file %s --h5ad-species human --gs-file %s --gs-species human --flag-filter-data True --flag-raw-count True --n-ctrl 1000 --flag-return-ctrl-raw-score False --flag-return-ctrl-norm-score True --out-folder %s",
-  h5ad_file, gs_file,  out_dir
-)
-system(cli_command)
-
-list.files("results/scdrs/output_TNBC/")
-
 # ----------------LumA------------------
 h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
 gs_file <- "results/scdrs/LumA.gs"
@@ -823,20 +505,6 @@ cli_command <- sprintf(
 system(cli_command)
 
 list.files("results/scdrs/output_LumA/")
-
-# ----------------LumA_GWASCatalog------------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-gs_file <- "results/scdrs/LumA_GWASCatalog.gs"
-out_dir <- "results/scdrs/output_LumA_GWASCatalog/"
-dir.create(out_dir, recursive = TRUE)
-
-cli_command <- sprintf(
-  "scdrs compute-score --h5ad-file %s --h5ad-species human --gs-file %s --gs-species human --flag-filter-data True --flag-raw-count True --n-ctrl 1000 --flag-return-ctrl-raw-score False --flag-return-ctrl-norm-score True --out-folder %s",
-  h5ad_file, gs_file,  out_dir
-)
-system(cli_command)
-
-list.files("results/scdrs/output_LumA_GWASCatalog/")
 
 # ----------------LumB------------------
 h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
@@ -852,20 +520,6 @@ system(cli_command)
 
 list.files("results/scdrs/output_LumB/")
 
-# ----------------LumB_GWASCatalog------------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-gs_file <- "results/scdrs/LumB_GWASCatalog.gs"
-out_dir <- "results/scdrs/output_LumB_GWASCatalog/"
-dir.create(out_dir, recursive = TRUE)
-
-cli_command <- sprintf(
-  "scdrs compute-score --h5ad-file %s --h5ad-species human --gs-file %s --gs-species human --flag-filter-data True --flag-raw-count True --n-ctrl 1000 --flag-return-ctrl-raw-score False --flag-return-ctrl-norm-score True --out-folder %s",
-  h5ad_file, gs_file,  out_dir
-)
-system(cli_command)
-
-list.files("results/scdrs/output_LumB_GWASCatalog/")
-
 # ----------------LumB_HER2Neg------------------
 h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
 gs_file <- "results/scdrs/LumB_HER2Neg.gs"
@@ -880,20 +534,6 @@ system(cli_command)
 
 list.files("results/scdrs/output_LumB_HER2Neg/")
 
-# ----------------LumB_HER2Neg_GWASCatalog------------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-gs_file <- "results/scdrs/LumB_HER2Neg_GWASCatalog.gs"
-out_dir <- "results/scdrs/output_LumB_HER2Neg_GWASCatalog/"
-dir.create(out_dir, recursive = TRUE)
-
-cli_command <- sprintf(
-  "scdrs compute-score --h5ad-file %s --h5ad-species human --gs-file %s --gs-species human --flag-filter-data True --flag-raw-count True --n-ctrl 1000 --flag-return-ctrl-raw-score False --flag-return-ctrl-norm-score True --out-folder %s",
-  h5ad_file, gs_file,  out_dir
-)
-system(cli_command)
-
-list.files("results/scdrs/output_LumB_HER2Neg_GWASCatalog/")
-
 # ----------------HER2------------------
 h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
 gs_file <- "results/scdrs/HER2.gs"
@@ -907,20 +547,6 @@ cli_command <- sprintf(
 system(cli_command)
 
 list.files("results/scdrs/output_HER2/")
-
-# ----------------HER2_GWASCatalog------------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-gs_file <- "results/scdrs/HER2_GWASCatalog.gs"
-out_dir <- "results/scdrs/output_HER2_GWASCatalog/"
-dir.create(out_dir, recursive = TRUE)
-
-cli_command <- sprintf(
-  "scdrs compute-score --h5ad-file %s --h5ad-species human --gs-file %s --gs-species human --flag-filter-data True --flag-raw-count True --n-ctrl 1000 --flag-return-ctrl-raw-score False --flag-return-ctrl-norm-score True --out-folder %s",
-  h5ad_file, gs_file,  out_dir
-)
-system(cli_command)
-
-list.files("results/scdrs/output_HER2_GWASCatalog/")
 
 # ---------- Check Metadata for --corr-analysis--------------
 library(reticulate)
@@ -995,20 +621,6 @@ system(cli_downstream)
 library(data.table)
 group_results_TNBC <- fread("results/scdrs/output_TNBC/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
 group_results_TNBC
-# --------------TNBC_GWASCatalog ----------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-score_file <- "results/scdrs/output_TNBC_GWASCatalog/ZSTAT.full_score.gz"
-out_dir <- "results/scdrs/output_TNBC_GWASCatalog/"
-
-cli_downstream <- sprintf(
-  "scdrs perform-downstream  --h5ad-file %s  --score-file %s  --out-folder %s  --group-analysis celltype_RNA  --gene-analysis --flag-filter-data True --flag-raw-count True",
-  h5ad_file, score_file, out_dir
-)
-system(cli_downstream)
-# Results
-library(data.table)
-group_results_TNBC_GWASCatalog <- fread("results/scdrs/output_TNBC_GWASCatalog/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
-group_results_TNBC_GWASCatalog
 
 # --------------LumA----------------
 h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
@@ -1024,20 +636,6 @@ system(cli_downstream)
 library(data.table)
 group_results_LumA <- fread("results/scdrs/output_LumA/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
 group_results_LumA
-# --------------LumA_GWASCatalog----------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-score_file <- "results/scdrs/output_LumA_GWASCatalog/ZSTAT.full_score.gz"
-out_dir <- "results/scdrs/output_LumA_GWASCatalog/"
-
-cli_downstream <- sprintf(
-  "scdrs perform-downstream  --h5ad-file %s  --score-file %s  --out-folder %s  --group-analysis celltype_RNA  --gene-analysis --flag-filter-data True --flag-raw-count True",
-  h5ad_file, score_file, out_dir
-)
-system(cli_downstream)
-# Results
-library(data.table)
-group_results_LumA_GWASCatalog <- fread("results/scdrs/output_LumA_GWASCatalog/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
-group_results_LumA_GWASCatalog
 
 # --------------LumB----------------
 h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
@@ -1054,21 +652,6 @@ library(data.table)
 group_results_LumB <- fread("results/scdrs/output_LumB/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
 group_results_LumB
 
-# --------------LumB_GWASCatalog----------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-score_file <- "results/scdrs/output_LumB_GWASCatalog/ZSTAT.full_score.gz"
-out_dir <- "results/scdrs/output_LumB_GWASCatalog/"
-
-cli_downstream <- sprintf(
-  "scdrs perform-downstream  --h5ad-file %s  --score-file %s  --out-folder %s  --group-analysis celltype_RNA  --gene-analysis --flag-filter-data True --flag-raw-count True",
-  h5ad_file, score_file, out_dir
-)
-system(cli_downstream)
-# Results
-library(data.table)
-group_results_LumB_GWASCatalog <- fread("results/scdrs/output_LumB_GWASCatalog/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
-group_results_LumB_GWASCatalog
-
 # --------------LumB_HER2Neg----------------
 h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
 score_file <- "results/scdrs/output_LumB_HER2Neg/ZSTAT.full_score.gz"
@@ -1084,21 +667,6 @@ library(data.table)
 group_results_LumB_HER2Neg <- fread("results/scdrs/output_LumB_HER2Neg/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
 group_results_LumB_HER2Neg
 
-# --------------LumB_HER2Neg_GWASCatalog----------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-score_file <- "results/scdrs/output_LumB_HER2Neg_GWASCatalog/ZSTAT.full_score.gz"
-out_dir <- "results/scdrs/output_LumB_HER2Neg_GWASCatalog/"
-
-cli_downstream <- sprintf(
-  "scdrs perform-downstream  --h5ad-file %s  --score-file %s  --out-folder %s  --group-analysis celltype_RNA  --gene-analysis --flag-filter-data True --flag-raw-count True",
-  h5ad_file, score_file, out_dir
-)
-system(cli_downstream)
-# Results
-library(data.table)
-group_results_LumB_HER2Neg_GWASCatalog <- fread("results/scdrs/output_LumB_HER2Neg_GWASCatalog/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
-group_results_LumB_HER2Neg_GWASCatalog
-
 # --------------HER2----------------
 h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
 score_file <- "results/scdrs/output_HER2/ZSTAT.full_score.gz"
@@ -1113,20 +681,6 @@ system(cli_downstream)
 library(data.table)
 group_results_HER2 <- fread("results/scdrs/output_HER2/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
 group_results_HER2
-# --------------HER2_GWASCatalog----------------
-h5ad_file <- "results/scdrs/rna_breastcancer.h5ad"
-score_file <- "results/scdrs/output_HER2_GWASCatalog/ZSTAT.full_score.gz"
-out_dir <- "results/scdrs/output_HER2_GWASCatalog/"
-
-cli_downstream <- sprintf(
-  "scdrs perform-downstream  --h5ad-file %s  --score-file %s  --out-folder %s  --group-analysis celltype_RNA  --gene-analysis --flag-filter-data True --flag-raw-count True",
-  h5ad_file, score_file, out_dir
-)
-system(cli_downstream)
-# Results
-library(data.table)
-group_results_HER2_GWASCatalog <- fread("results/scdrs/output_HER2_GWASCatalog/ZSTAT.scdrs_group.celltype_RNA", sep = "\t", header = TRUE)
-group_results_HER2_GWASCatalog
 
 #combine the results
 group_results_TNBC<-group_results_TNBC[,c(1:2,4)]
@@ -1145,22 +699,6 @@ all<-left_join(all,group_results_LumB_HER2Neg, by=c('group','n_cell'))
 all<-left_join(all,group_results_HER2, by=c('group','n_cell'))
 all_scDRs_result<-all
 fwrite(all_scDRs_result,'results/scdrs/scDRS_results_all_BCAC.csv')
-
-# GWAS Catalog
-group_results_TNBC_GWASCatalog<-group_results_TNBC_GWASCatalog[,c(1:2,4)]
-names(group_results_TNBC_GWASCatalog)[3]<-'TNBC_GWASCatalog'
-group_results_LumA_GWASCatalog<-group_results_LumA_GWASCatalog[,c(1:2,4)]
-names(group_results_LumA_GWASCatalog)[3]<-'LumA_GWASCatalog'
-group_results_LumB_GWASCatalog<-group_results_LumB_GWASCatalog[,c(1:2,4)]
-names(group_results_LumB_GWASCatalog)[3]<-'LumB'
-group_results_LumB_HER2Neg_GWASCatalog<-group_results_LumB_HER2Neg_GWASCatalog[,c(1:2,4)]
-names(group_results_LumB_HER2Neg_GWASCatalog)[3]<-'LumB_HER2Neg_GWASCatalog'
-group_results_HER2_GWASCatalog<-group_results_HER2_GWASCatalog[,c(1:2,4)]
-names(group_results_HER2_GWASCatalog)[3]<-'HER2_GWASCatalog'
-all_GWASCatalog<-left_join(group_results_TNBC_GWASCatalog,group_results_LumA_GWASCatalog, by=c('group','n_cell'))
-all_GWASCatalog<-left_join(all_GWASCatalog,group_results_LumB_GWASCatalog, by=c('group','n_cell'))
-all_GWASCatalog<-left_join(all_GWASCatalog,group_results_LumB_HER2Neg_GWASCatalog, by=c('group','n_cell'))
-all_GWASCatalog<-left_join(all_GWASCatalog,group_results_HER2_GWASCatalog, by=c('group','n_cell'))
 
 # n_ctrl (num):Number of control gene sets (1,000, as specified by --n-ctrl 1000 in compute-score).
 # Used to compute Monte Carlo p-values (mcp) and z-scores (mcz).

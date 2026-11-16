@@ -1,22 +1,16 @@
 ## 01_prepare_gwas_inputs.R
-## Per-subtype GWAS tables for MAGMA / scDRS (Fig S10), from two sources:
-##   (1) the filtered BCAC summary statistics (GRCh37), with rsIDs added from the 1000 Genomes
-##       EUR reference VCF distributed with scPagwas;
-##   (2) the harmonised GWAS Catalog releases of the same study (GCST90454344-GCST90454348,
-##       GRCh38), filtered to effect-allele frequency 0.01-0.99.
+## Per-subtype GWAS tables for MAGMA / scDRS (Fig S10) from the filtered BCAC summary statistics
+## (GRCh37), with rsIDs added from the 1000 Genomes EUR reference VCF distributed with scPagwas.
 ## Each table has columns chrom, pos, p, se, maf, beta, chrposID, rsid; beta is oriented to the
 ## minor allele.
 ##
 ## Inputs   results/gwas/bcac_gwas_filtered.csv              (02_gwas_ld_blocks/01_filter_gwas.R)
 ##          $KG_DIR/1000G.EUR.QC.plink.simple.vcf             (scPagwas reference data)
-##          $GWASCAT_DIR/GCST9045434{4-8}_*_Zhang2020.h.tsv.gz (GWAS Catalog harmonised files)
 ## Outputs  results/gwas/bcac_gwas_filtered_<subtype>.csv
-##          results/gwas/<subtype>_filtered_GWASCatalog.csv
 ## Run from the repository root:  Rscript scripts/07_scdrs/01_prepare_gwas_inputs.R
 
-TNBC_ROOT   <- Sys.getenv("TNBC_ROOT", ".")
-KG_DIR      <- Sys.getenv("KG_DIR", "data/1KG")
-GWASCAT_DIR <- Sys.getenv("GWASCAT_DIR", "data/GWASCatalog")
+TNBC_ROOT <- Sys.getenv("TNBC_ROOT", ".")
+KG_DIR    <- Sys.getenv("KG_DIR", "data/1KG")
 
 library(data.table)
 library(dplyr)
@@ -35,7 +29,7 @@ vcf  <- readVcf(vcf_fixed, "hg19")
 snps <- rowRanges(vcf)
 snp_data <- data.frame(rsid = names(snps), chrposID = paste0("chr", seqnames(snps), ":", start(snps)))
 
-## ---- (1) BCAC, one table per subtype ----
+## ---- one table per subtype ----
 BCAC_filt <- fread("results/gwas/bcac_gwas_filtered.csv", header = TRUE)
 BCAC_COLS <- list(                      # subtype = c(p, se, log OR)
   TNBC         = c("Triple_Neg_P_meta",        "Triple_Neg_sd_meta",        "Triple_Neg_log_or_meta"),
@@ -56,20 +50,3 @@ for (s in names(BCAC_COLS)) {
   fwrite(d, sprintf("results/gwas/bcac_gwas_filtered_%s.csv", s))
 }
 
-## ---- (2) GWAS Catalog harmonised releases ----
-GWASCAT <- c(TNBC         = "GCST90454344_Triple_Neg_Zhang2020.h.tsv.gz",
-             LumA         = "GCST90454345_luminal_A_Zhang2020.h.tsv.gz",
-             LumB         = "GCST90454346_luminal_B_Zhang2020.h.tsv.gz",
-             LumB_HER2Neg = "GCST90454347_luminal_B_HER2Neg_Zhang2020.h.tsv.gz",
-             HER2         = "GCST90454348_HER2_Zhang2020.h.tsv.gz")
-for (s in names(GWASCAT)) {
-  g <- fread(file.path(GWASCAT_DIR, GWASCAT[[s]]), header = TRUE)
-  g <- g[g$effect_allele_frequency >= 0.01 & g$effect_allele_frequency <= 0.99, ]
-  eaf <- g$effect_allele_frequency
-  d <- data.frame(chrom = g$chromosome, pos = g$base_pair_location, p = g$p_value,
-                  se = g$standard_error, rsid = g$rsid,
-                  maf  = ifelse(eaf < 0.5, eaf, 1 - eaf),
-                  beta = ifelse(eaf < 0.5, g$beta, -g$beta),
-                  chrposID = paste0("chr", g$chromosome, ":", g$base_pair_location))
-  fwrite(d, sprintf("results/gwas/%s_filtered_GWASCatalog.csv", s))
-}
