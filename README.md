@@ -24,32 +24,6 @@ scRNA-/scATAC-seq of normal breast tissue, and repeated in an independent single
 </p>
 <p align="center"><b>Figure 1.</b> Overview of the study workflow.</p>
 
-| Folder (`scripts/`) | Analysis | Figures / tables |
-|---|---|---|
-| `01_singlecell_annotation` | scRNA-/scATAC-seq QC, peak calling, cell-type annotation, motif annotation and chromVAR (GSE162798) | Fig 2, Table S1 |
-| `02_gwas_ld_blocks` | BCAC subtype GWAS filtering; variants lifted GRCh37 → GRCh38 and assigned to 1,336 European LD blocks | Table S2 |
-| `03_tf_gwas` | Variant × peak × motif matrix; TF-GWAS model for overall BC and five subtypes | Fig 3A/C, Tables S3–S4 |
-| `04_celltype_enrichment` | Subtype-specific motifs; cell-type enrichment (AddModuleScore, chromVAR) | Fig 3B/D–F, Figs S2–S8, Table S5 |
-| `05_replication` | Independent replication (GSE244585, 15 donors, 10x Multiome); TF-family grouping | Tables S6–S8 |
-| `06_dissociation_ap1` | Dissociation-stress and AP-1 scores; cohort composition | Fig S9 |
-| `07_scdrs` | Single-cell disease relevance score | Fig S10 |
-| `08_tcga_viper_depmap` | TCGA-BRCA DESeq2; msVIPER TF activity; DepMap 25Q3 gene effects | Fig 4, Tables S9–S11, S14 |
-| `09_motifbreakR_gtex_coloc` | motifbreakR; colocalisation with GTEx v8 breast cis-eQTL; GTEx v11 genotype–expression | Fig 5, Fig S11, Tables S12–S13 |
-
-Each folder's `README.md` lists its scripts in run order with what each one produces;
-[`docs/FIGURES_AND_TABLES.md`](docs/FIGURES_AND_TABLES.md) maps every figure panel and table to
-its script. Every script starts with a header giving its purpose, inputs, outputs and run command.
-
-## Requirements
-
-- R 4.4.3 with Signac 1.16.0, Seurat 5.5.1, chromVAR 1.30.1, motifmatchr 1.30.0, JASPAR2022,
-  TFBSTools 1.44.0, lme4, lmerTest, coloc, motifbreakR and data.table; the TCGA, VIPER and DepMap
-  scripts (`08_tcga_viper_depmap`) were run with R 4.5.1, DESeq2 1.48.2 and viper 1.44.0.
-  Full list: `environment/R_packages.txt`.
-- MACS2 2.2.9.1, PLINK 1.9 (LD clumping), MAGMA and scDRS 1.0.3
-- Python ≥ 3.9 with h5py, numpy, pandas, matplotlib, openpyxl (`environment/requirements.txt`)
-- SLURM for the `*.sbatch` wrappers (optional; set the partition line for your cluster)
-
 ## Data
 
 No data are included in this repository. All inputs are public or available on application:
